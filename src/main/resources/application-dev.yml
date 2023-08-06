@@ -5,18 +5,31 @@ spring:
   jpa:
     database: POSTGRESQL
     show-sql: true
+    open-in-view: false
+
     hibernate:
       ddl-auto: none
-    open-in-view: false
+
     properties:
       hibernate:
         format_sql: true
+        show_sql: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
-    username:
-    password:
+#    url: jdbc:postgresql://localhost:5432/<database_name>
+#    username: <value>
+#    password: <value>
     driverClassName: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+
+    hikari:
+      pool-name:  SpringBootJPAHikariCP
+      connection-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 10000
+      auto-commit: true
+      max-lifetime:
 
   flyway:
     enabled: true
@@ -27,10 +40,34 @@ spring:
     sql-migration-prefix: V
     sql-migration-separator: __
     sql-migration-suffixes: .sql
+#    url:
+#    user:
+#    password:
+
+  output:
+    ansi:
+      enabled: detect
 
 logging:
   level:
+    org.springframework.web: ERROR
     org.springframework.security.web: INFO
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
+    org.hibernate: ERROR
+    hibernate.SQL: DEBUG
+    hibernate.cache: DEBUG
+    hibernate.stat: DEBUG
+
+springdoc:
+  swagger-ui:
+    enabled: true
+
+  api-docs:
+    enabled: true
+    path: /brothers-delivery-api-docs
+
+###### extra settings ###############################################################
 
 app:
   auth:
