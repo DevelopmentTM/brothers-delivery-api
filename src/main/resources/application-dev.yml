@@ -21,16 +21,16 @@ spring:
     url: jdbc:postgresql://localhost:5432/db_dev_brothers_delivery
 
     #    dev-bruno
-    username: postgres
-    password: postg
+#    username: postgres
+#    password: postg
 
     #    dev-scooby
-#    username:
-#    password:
+#    username: postgres
+#    password: root
 
       #    dev-padrão
-#      username:
-#      password:
+#    username: postgres
+#    password: Seeloko153247,
 
     hikari:
       pool-name:  SpringBootJPAHikariCP
