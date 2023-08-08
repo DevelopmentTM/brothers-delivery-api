@@ -15,12 +15,13 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paymentId")
     private Long paymentId;
 
     @Column
-    private String orderId;
-
-    @Column
     private BigDecimal amount;
+
+    @OneToOne(mappedBy = "orderPayment")
+    private Order paymentOrder;
 
 }

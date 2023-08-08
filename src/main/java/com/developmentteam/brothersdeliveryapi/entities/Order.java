@@ -3,6 +3,8 @@ package com.developmentteam.brothersdeliveryapi.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +15,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "orderId")
     private Long orderId;
 
     @Column
@@ -29,4 +32,22 @@ public class Order {
 
     @Column
     private String storeId;
+
+    @OneToMany()
+    private List<OrderItems> orderItens;
+
+    @OneToOne(mappedBy = "deliveryOrder")
+    private Delivery orderDelivery;
+
+    @OneToOne()
+    @JoinColumn(name = "payment_id")
+    private Payment orderPayment;
+
+    @ManyToOne()
+    @JoinColumn(name = "store_id")
+    private Stores stores;
+
+    @OneToMany(mappedBy = "orderItemId")
+    private List<OrderItems> orderItems;
+
 }
