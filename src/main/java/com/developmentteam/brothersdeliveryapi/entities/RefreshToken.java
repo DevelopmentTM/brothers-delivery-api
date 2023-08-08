@@ -13,18 +13,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "ResetToken", schema = "default")
-public class ResetToken {
+public class RefreshToken {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-   @Column()
-   private Long resetCodeId;
+   @Column(name = "refreshTokenId")
+   private Long refreshTokenId;
 
    @Column()
    private String refreshCode;
 
    @Column()
    private LocalDateTime refreshCodeExpiryAt;
+
+   @OneToOne()
+   @JoinColumn(name = "user_id")
+   private User refreshTokenUser;
 
 }

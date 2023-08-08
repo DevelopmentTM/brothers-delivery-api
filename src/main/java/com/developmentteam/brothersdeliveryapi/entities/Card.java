@@ -16,6 +16,7 @@ public class Card {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "cardId")
    private Long cardId;
 
    @Column()
@@ -26,5 +27,9 @@ public class Card {
 
    @Column()
    private String cardExpiration;
+
+   @ManyToOne()
+   @JoinColumn(name = "user_id")
+   private User cardUser;
 
 }

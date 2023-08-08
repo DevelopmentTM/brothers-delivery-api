@@ -3,12 +3,7 @@ package com.developmentteam.brothersdeliveryapi.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +17,7 @@ import lombok.Setter;
 @Setter
 public class Product {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productId")
     private Long productId;
@@ -42,8 +38,9 @@ public class Product {
     private List<Category> category;
 
     @ManyToMany(mappedBy = "products")
-    private List<OrderItens> orderItens;
-
-    @ManyToMany(mappedBy = "products")
     private List<User> users;
+
+    @OneToMany(mappedBy = "orderItemId")
+    private List<OrderItems> orderItems;
+
 }

@@ -18,6 +18,7 @@ public class ResetCode {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "resetCodeId")
    private Long resetCodeId;
 
    @Column()
@@ -25,5 +26,9 @@ public class ResetCode {
 
    @Column()
    private LocalDateTime refreshCodeExpiryAt;
+
+   @ManyToOne()
+   @JoinColumn(name = "user_id")
+   private User resetCodeUser;
 
 }

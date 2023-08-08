@@ -8,12 +8,19 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Order_Itens", schema = "default")
-public class OrderItens {
+@Table(name = "Order_Items", schema = "default")
+public class OrderItems {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderItensId;
+    @EmbeddedId
+    private OrderItemId orderItemId;
+
+    @ManyToOne()
+    @MapsId("orderId")
+    private Order order;
+
+    @ManyToOne()
+    @MapsId("productId")
+    private Product product;
 
     @Column
     private String productId;
@@ -23,4 +30,5 @@ public class OrderItens {
 
     @Column
     private Integer quantity;
+
 }
