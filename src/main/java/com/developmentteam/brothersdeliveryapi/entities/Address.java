@@ -33,4 +33,7 @@ public class Address {
    @Column()
    private Integer addressNumber;
 
+   @ManyToOne
+   @JoinColumn(name = "userId")
+   private User addressUser;
 }

@@ -2,12 +2,18 @@ package com.developmentteam.brothersdeliveryapi.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +30,7 @@ public class Stores {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "storeId")
     private Long storeId;
 
     @Column(name = "storeName")
@@ -32,8 +39,9 @@ public class Stores {
     @Column(name = "storeDescription")
     private String storeDescription;
 
-    @Column(name = "segmentId")
-    private Long segmentId;
+    @ManyToOne
+    @JoinColumn(name = "segmentId")
+    private Segment segment;
 
     @Column(name = "assessment")
     private BigDecimal assessment;
@@ -43,5 +51,16 @@ public class Stores {
 
     @Column(name = "endDelivery")
     private LocalDateTime endDelivery;
+
+    @ManyToMany
+    @JoinTable(name = "store_product", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "productId"))
+    private List<Product> productId;
+
+    @ManyToOne
+    @JoinColumn(name = "segmentId")
+    private Segment segments;
+
+    @OneToMany(mappedBy = "stores")
+    private List<Order> order;
 
 }
