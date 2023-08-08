@@ -16,11 +16,21 @@ spring:
         show_sql: true
 
   datasource:
-#    url: jdbc:postgresql://localhost:5432/<database_name>
-#    username: <value>
-#    password: <value>
     driverClassName: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/db_dev_brothers_delivery
+
+    #    dev-bruno
+    username: postgres
+    password: postg
+
+    #    dev-scooby
+#    username:
+#    password:
+
+      #    dev-padrão
+#      username:
+#      password:
 
     hikari:
       pool-name:  SpringBootJPAHikariCP
@@ -29,7 +39,6 @@ spring:
       maximum-pool-size: 10
       idle-timeout: 10000
       auto-commit: true
-      max-lifetime:
 
   flyway:
     enabled: true
@@ -52,8 +61,8 @@ logging:
   level:
     org.springframework.web: ERROR
     org.springframework.security.web: INFO
-    com.zaxxer.hikari.HikariConfig: DEBUG
-    com.zaxxer.hikari: TRACE
+    com.zaxxer.hikari.HikariConfig: ERROR
+    com.zaxxer.hikari: ERROR
     org.hibernate: ERROR
     hibernate.SQL: DEBUG
     hibernate.cache: DEBUG
