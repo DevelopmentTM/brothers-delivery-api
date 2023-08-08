@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Payment", schema = "default")
+@Table(name = "Payment", schema = "public")
 public class Payment {
 
     @Id
@@ -18,10 +18,11 @@ public class Payment {
     @Column(name = "paymentId")
     private Long paymentId;
 
-    @Column
-    private BigDecimal amount;
+    @Column(name = "paymentAmount")
+    private BigDecimal paymentAmount;
 
     @OneToOne(mappedBy = "orderPayment")
+    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
     private Order paymentOrder;
 
 }

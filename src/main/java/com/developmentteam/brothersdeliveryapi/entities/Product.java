@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Product", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -31,16 +31,13 @@ public class Product {
     @Column(name = "productPrice")
     private BigDecimal productPrice;
 
-    @ManyToMany(mappedBy = "products")
-    private List<Stores> stores;
+    @ManyToMany(mappedBy = "storeProducts", fetch = FetchType.LAZY)
+    private List<Store> productStores;
 
-    @ManyToMany(mappedBy = "products")
-    private List<Category> category;
+    @ManyToMany(mappedBy = "categoryProducts", fetch = FetchType.LAZY)
+    private List<Category> productCategories;
 
-    @ManyToMany(mappedBy = "products")
-    private List<User> users;
-
-    @OneToMany(mappedBy = "orderItemId")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderItems> orderItems;
 
 }

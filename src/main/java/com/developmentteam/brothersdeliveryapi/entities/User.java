@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "User", schema = "default")
+@Table(name = "User", schema = "public")
 public class User {
 
    @Id
@@ -21,38 +21,39 @@ public class User {
    @Column(name = "userId")
    private Long userId;
 
-   @Column()
+   @Column(name = "userName")
    private  String userName;
 
-   @Column()
+   @Column(name = "userEmail")
    private String userEmail;
 
-   @Column()
+   @Column(name = "userPassword")
    private String userPassword;
 
-   @Column()
+   @Column(name = "userPhone")
    private String userPhone;
 
-   @Column()
+   @Column(name = "userCpf")
    private  String userCpf;
 
-   @OneToMany(mappedBy = "cardUser")
+   @OneToMany(mappedBy = "cardUser", fetch = FetchType.LAZY)
    private List<Card> userCards;
 
-   @OneToMany(mappedBy = "addressUser")
+   @OneToMany(mappedBy = "addressUser", fetch = FetchType.LAZY)
    private List<Address> userAddress;
 
-   @OneToMany(mappedBy = "resetCodeUser")
+   @OneToMany(mappedBy = "resetCodeUser", fetch = FetchType.LAZY)
    private List<ResetCode> userResetCoders;
 
    @OneToOne(mappedBy = "refreshTokenUser")
    private RefreshToken userRefreshToken;
 
-   @ManyToMany
+   @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
-           name = "user_role",
-           joinColumns = @JoinColumn(name = "user_id"),
-           inverseJoinColumns = @JoinColumn(name = "role_id"))
+           name = "user_roles",
+           joinColumns = @JoinColumn(name = "userId"),
+           inverseJoinColumns = @JoinColumn(name = "roleId")
+   )
    private List<Role> userRoles;
 
 }

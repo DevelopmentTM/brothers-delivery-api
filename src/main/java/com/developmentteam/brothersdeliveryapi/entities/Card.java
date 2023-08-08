@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Card", schema = "default")
+@Table(name = "Card", schema = "public")
 public class Card {
 
    @Id
@@ -19,17 +19,17 @@ public class Card {
    @Column(name = "cardId")
    private Long cardId;
 
-   @Column()
+   @Column(name = "cardNumber")
    private Integer cardNumber;
 
-   @Column()
+   @Column(name = "cardCvv")
    private String cardCvv;
 
-   @Column()
+   @Column(name = "cardExpiration")
    private String cardExpiration;
 
-   @ManyToOne()
-   @JoinColumn(name = "user_id")
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
    private User cardUser;
 
 }

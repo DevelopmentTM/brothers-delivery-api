@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ResetToken", schema = "default")
+@Table(name = "RefreshToken", schema = "public")
 public class RefreshToken {
 
    @Id
@@ -20,14 +20,14 @@ public class RefreshToken {
    @Column(name = "refreshTokenId")
    private Long refreshTokenId;
 
-   @Column()
+   @Column(name = "refreshCode")
    private String refreshCode;
 
-   @Column()
+   @Column(name = "refreshCodeExpiryAt")
    private LocalDateTime refreshCodeExpiryAt;
 
-   @OneToOne()
-   @JoinColumn(name = "user_id")
+   @OneToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
    private User refreshTokenUser;
 
 }

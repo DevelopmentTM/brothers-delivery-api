@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ResetCode", schema = "default")
+@Table(name = "ResetCode", schema = "public")
 public class ResetCode {
 
    @Id
@@ -21,14 +21,14 @@ public class ResetCode {
    @Column(name = "resetCodeId")
    private Long resetCodeId;
 
-   @Column()
+   @Column(name =  "refreshCode")
    private String refreshCode;
 
-   @Column()
+   @Column(name =  "refreshCodeExpiryAt")
    private LocalDateTime refreshCodeExpiryAt;
 
-   @ManyToOne()
-   @JoinColumn(name = "user_id")
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
    private User resetCodeUser;
 
 }

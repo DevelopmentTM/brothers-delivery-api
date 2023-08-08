@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Order", schema = "default")
+@Table(name = "Order", schema = "public")
 public class Order {
 
     @Id
@@ -18,36 +18,29 @@ public class Order {
     @Column(name = "orderId")
     private Long orderId;
 
-    @Column
-    private String addressId;
+    @Column(name =  "orderAddressId")
+    private Long orderAddressId;
 
-    @Column
-    private String cardId;
+    @Column(name =  "orderCardId")
+    private Long orderCardId;
 
-    @Column
-    private String userId;
+    @Column(name =  "ordersUerId")
+    private Long ordersUerId;
 
-    @Column
-    private String status;
-
-    @Column
-    private String storeId;
-
-    @OneToMany()
-    private List<OrderItems> orderItens;
+    @Column(name =  "orderStatus")
+    private String orderStatus;
 
     @OneToOne(mappedBy = "deliveryOrder")
     private Delivery orderDelivery;
 
-    @OneToOne()
-    @JoinColumn(name = "payment_id")
+    @OneToOne(mappedBy = "paymentOrder")
     private Payment orderPayment;
 
-    @ManyToOne()
-    @JoinColumn(name = "store_id")
-    private Stores stores;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storeId", referencedColumnName = "storeId", nullable = false)
+    private Store orderStore;
 
-    @OneToMany(mappedBy = "orderItemId")
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItems> orderItems;
 
 }

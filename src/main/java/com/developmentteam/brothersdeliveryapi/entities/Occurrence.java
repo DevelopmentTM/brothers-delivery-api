@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Occurrence", schema = "default")
+@Table(name = "Occurrence", schema = "public")
 public class Occurrence {
 
     @Id
@@ -23,8 +23,8 @@ public class Occurrence {
     @Column
     private LocalDateTime occurrenceDate;
 
-    @ManyToOne()
-    @JoinColumn(name = "delivery_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "deliveryId", referencedColumnName = "deliveryId", nullable = false)
     private Delivery occurrenceDelivery;
 
 }

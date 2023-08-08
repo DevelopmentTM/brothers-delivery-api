@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Delivery", schema = "default")
+@Table(name = "Delivery", schema = "public")
 public class Delivery {
 
     @Id
@@ -19,15 +19,17 @@ public class Delivery {
     @Column(name = "deliveryId")
     private Long deliveryId;
 
+    @Column(name = "deliveryStart")
     private LocalDateTime deliveryStart;
 
+    @Column(name = "deliveryEnd")
     private LocalDateTime deliveryEnd;
 
-    @OneToMany(mappedBy = "occurrenceDelivery")
+    @OneToMany(mappedBy = "occurrenceDelivery", fetch = FetchType.LAZY)
     private List<Occurrence> deliveryOccurrence;
 
-    @OneToOne()
-    @JoinColumn(name = "order_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
     private Order deliveryOrder;
 
 }

@@ -1,5 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +12,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class OrderItemId implements Serializable {
+public class OrderItemPrimaryKey implements Serializable {
 
+    @Column(name = "orderId")
     private Long orderId;
 
-    private Long itemId;
+    @Column(name = "productId")
+    private Long productId;
 
 }

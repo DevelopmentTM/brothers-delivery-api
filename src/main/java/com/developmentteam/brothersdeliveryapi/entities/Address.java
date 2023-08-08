@@ -11,29 +11,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Address", schema = "default")
+@Table(name = "Address", schema = "public")
 public class Address {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name =  "addressId")
    private Long addressId;
 
-   @Column()
+   @Column(name =  "addressCity")
    private String addressCity;
 
-   @Column()
+   @Column(name =  "addressState")
    private String addressState;
 
-   @Column()
+   @Column(name =  "addressStreet")
    private String addressStreet;
 
-   @Column()
+   @Column(name =  "addressComplement")
    private String addressComplement;
 
-   @Column()
+   @Column(name =  "addressNumber")
    private Integer addressNumber;
 
-   @ManyToOne
-   @JoinColumn(name = "userId")
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
    private User addressUser;
 }

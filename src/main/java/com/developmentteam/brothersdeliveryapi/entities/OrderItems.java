@@ -8,27 +8,23 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Order_Items", schema = "default")
+@Table(name = "order_items", schema = "public")
 public class OrderItems {
 
     @EmbeddedId
-    private OrderItemId orderItemId;
+    private OrderItemPrimaryKey orderItemId;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("orderId")
+    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
     private Order order;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("productId")
+    @JoinColumn(name = "productId", referencedColumnName = "productId", nullable = false)
     private Product product;
 
-    @Column
-    private String productId;
-
-    @Column
-    private String orderId;
-
-    @Column
+    @Column(name = "quantity")
     private Integer quantity;
 
 }

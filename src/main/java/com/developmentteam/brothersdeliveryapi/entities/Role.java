@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Role", schema = "default")
+@Table(name = "Role", schema = "public")
 public class Role {
 
    @Id
@@ -21,10 +21,10 @@ public class Role {
    @Column(name = "roleId")
    private Long roleId;
 
-   @Column()
+   @Column(name =  "roleName")
    private String roleName;
 
-   @ManyToMany(mappedBy = "userRoles")
+   @ManyToMany(mappedBy = "userRoles", fetch = FetchType.LAZY)
    private List<User> roleUsers;
 
 }
