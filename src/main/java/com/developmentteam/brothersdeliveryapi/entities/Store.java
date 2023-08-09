@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Store {
     private Long storeId;
 
     @Column(name = "storeName")
+    @NotNull
     private String storeName;
 
     @Column(name = "storeDescription")
@@ -32,11 +34,13 @@ public class Store {
     @Column(name = "assessment")
     private BigDecimal assessment;
 
-    @Column(name = "startDelivery")
-    private LocalDateTime startDelivery;
+    @Column(name = "storeDeliveryStar")
+    @NotNull
+    private LocalDateTime storeDeliveryStar;
 
-    @Column(name = "endDelivery")
-    private LocalDateTime endDelivery;
+    @Column(name = "storeDeliveryEnd")
+    @NotNull
+    private LocalDateTime storeDeliveryEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "segmentId", referencedColumnName = "segmentId", nullable = false)

@@ -3,6 +3,7 @@ package com.developmentteam.brothersdeliveryapi.entities;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Segment {
     private Long segmentId;
 
     @Column(name = "segmentNome")
+    @NotNull
     private String segmentNome;
 
     @Column(name = "segmentDescription")
