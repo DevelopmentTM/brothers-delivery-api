@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Category", schema = "public")
+@Table(name = "category", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

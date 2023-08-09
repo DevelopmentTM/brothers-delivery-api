@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Store", schema = "public")
+@Table(name = "store", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -56,5 +56,8 @@ public class Store {
 
     @OneToMany(mappedBy = "orderStore", fetch = FetchType.LAZY)
     private List<Order> storeOrders;
+
+    @ManyToMany(mappedBy = "userStores", fetch = FetchType.LAZY)
+    private List<User> storeUser;
 
 }

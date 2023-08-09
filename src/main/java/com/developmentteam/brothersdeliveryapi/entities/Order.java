@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Order", schema = "public")
+@Table(name = "order", schema = "public")
 public class Order {
 
     @Id
@@ -23,9 +23,6 @@ public class Order {
 
     @Column(name =  "orderCardId")
     private Long orderCardId;
-
-    @Column(name =  "ordersUerId")
-    private Long ordersUerId;
 
     @Column(name =  "orderStatus")
     private String orderStatus;

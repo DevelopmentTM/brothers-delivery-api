@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "RefreshToken", schema = "public")
+@Table(name = "refresh_token", schema = "public")
 public class RefreshToken {
 
    @Id
