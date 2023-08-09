@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "Delivery", schema = "public")
+@Table(name = "delivery", schema = "public")
 public class Delivery {
 
     @Id

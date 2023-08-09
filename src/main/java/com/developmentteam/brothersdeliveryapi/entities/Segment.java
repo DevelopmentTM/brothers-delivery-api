@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Segment", schema = "public")
+@Table(name = "segment", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
