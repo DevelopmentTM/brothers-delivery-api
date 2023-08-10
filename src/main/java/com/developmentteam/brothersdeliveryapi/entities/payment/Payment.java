@@ -1,5 +1,6 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.payment;
 
+import com.developmentteam.brothersdeliveryapi.entities.orders.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,10 +16,10 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paymentId")
+    @Column(name = "paymentId", nullable = false)
     private Long paymentId;
 
-    @Column(name = "paymentAmount")
+    @Column(name = "paymentAmount", nullable = false)
     private BigDecimal paymentAmount;
 
     @OneToOne

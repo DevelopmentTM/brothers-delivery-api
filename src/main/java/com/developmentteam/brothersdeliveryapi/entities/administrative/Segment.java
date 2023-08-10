@@ -1,9 +1,15 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.administrative;
 
 import java.util.List;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +28,10 @@ public class Segment {
     @Column(name = "segmentId")
     private Long segmentId;
 
-    @Column(name = "segmentNome")
-    @NotNull
+    @Column(name = "segmentNome", nullable = true, length = 50)
     private String segmentNome;
 
-    @Column(name = "segmentDescription")
+    @Column(name = "segmentDescription", length = 255)
     private String segmentDescription;
 
     @OneToMany(mappedBy = "storeSegment", fetch = FetchType.LAZY)

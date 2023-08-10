@@ -29,8 +29,8 @@ spring:
 #    password: root
 
       #    dev-padrão
-#    username: postgres
-#    password: Seeloko153247,
+    username: postgres
+    password: Seeloko153247,
 
     hikari:
       pool-name:  SpringBootJPAHikariCP

@@ -1,9 +1,13 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.orders;
 
+import com.developmentteam.brothersdeliveryapi.entities.payment.Payment;
+import com.developmentteam.brothersdeliveryapi.entities.deliveries.Delivery;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+
+import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 
 @Entity
 @NoArgsConstructor
@@ -15,16 +19,16 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orderId")
+    @Column(name = "orderId", nullable = false)
     private Long orderId;
 
-    @Column(name =  "orderAddressId")
+    @Column(name =  "orderAddressId", nullable = false)
     private Long orderAddressId;
 
-    @Column(name =  "orderCardId")
+    @Column(name =  "orderCardId", nullable = false)
     private Long orderCardId;
 
-    @Column(name =  "orderStatus")
+    @Column(name =  "orderStatus", nullable = false, length = 20)
     private String orderStatus;
 
     @OneToOne(mappedBy = "deliveryOrder")
