@@ -1,6 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.entities.auth;
 
-import com.developmentteam.brothersdeliveryapi.entities.Store;
+
 import com.developmentteam.brothersdeliveryapi.entities.customers.Address;
 import com.developmentteam.brothersdeliveryapi.entities.customers.Card;
 import jakarta.persistence.*;

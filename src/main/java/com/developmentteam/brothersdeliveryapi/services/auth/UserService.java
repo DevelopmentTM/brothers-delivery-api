@@ -10,12 +10,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-   public UserResponse createUser(UserRequest request) {
-      User user = User.builder()
-
-              .build();
-
-      return  UserResponse.toResponse("name", "email");
-   }
+   
 
 }
