@@ -3,6 +3,7 @@ package com.developmentteam.brothersdeliveryapi.entities;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.developmentteam.brothersdeliveryapi.entities.orders.OrderItems;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

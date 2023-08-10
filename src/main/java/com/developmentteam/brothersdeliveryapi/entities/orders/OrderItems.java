@@ -1,5 +1,8 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.orders;
 
+import com.developmentteam.brothersdeliveryapi.entities.OrderItemPrimaryKey;
+import com.developmentteam.brothersdeliveryapi.entities.Product;
+import com.developmentteam.brothersdeliveryapi.entities.orders.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,7 +27,7 @@ public class OrderItems {
     @JoinColumn(name = "productId", referencedColumnName = "productId", nullable = false)
     private Product product;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
 }

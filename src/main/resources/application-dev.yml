@@ -25,12 +25,12 @@ spring:
     # password: postg
 
     #    dev-scooby
-    username: postgres
-    password: root
+#    username: postgres
+#    password: root
 
       #    dev-padrão
-#    username: postgres
-#    password: Seeloko153247,
+    username: postgres
+    password: Seeloko153247,
 
     hikari:
       pool-name:  SpringBootJPAHikariCP
