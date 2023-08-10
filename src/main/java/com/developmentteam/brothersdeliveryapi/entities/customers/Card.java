@@ -1,5 +1,6 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.customers;
 
+import com.developmentteam.brothersdeliveryapi.entities.auth.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,13 +20,13 @@ public class Card {
    @Column(name = "cardId")
    private Long cardId;
 
-   @Column(name = "cardNumber")
+   @Column(name = "cardNumber", nullable = false)
    private Integer cardNumber;
 
-   @Column(name = "cardCvv")
+   @Column(name = "cardCvv", nullable = false, length = 3)
    private String cardCvv;
 
-   @Column(name = "cardExpiration")
+   @Column(name = "cardExpiration", nullable = false)
    private String cardExpiration;
 
    @ManyToOne(fetch = FetchType.LAZY)

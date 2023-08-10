@@ -42,15 +42,16 @@ create table user_roles (
 
 create table Refresh_Token (
     refreshTokenId integer not null PRIMARY KEY ,
-    refreshCode integer not null,
+    refreshToken varchar(200) not null,
+    refreshTokenExpiryAt timestamp not null ,
     userId integer not null ,
     foreign key (userId) references _User
 );
 
 create table Reset_Code (
     resetCodeId integer not null ,
-    resetCode varchar(255) not null ,
-    refreshCodeExpiryAt timestamp not null ,
+    resetCode integer not null ,
+    resetCodeExpiryAt timestamp not null ,
     userId integer not null ,
     foreign key (userId) references _User
 );

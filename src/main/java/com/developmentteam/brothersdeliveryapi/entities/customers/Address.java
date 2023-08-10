@@ -1,5 +1,6 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.customers;
 
+import com.developmentteam.brothersdeliveryapi.entities.auth.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,19 +20,19 @@ public class Address {
    @Column(name =  "addressId")
    private Long addressId;
 
-   @Column(name =  "addressCity")
+   @Column(name =  "addressCity", nullable = false, length = 40)
    private String addressCity;
 
-   @Column(name =  "addressState")
+   @Column(name =  "addressState", nullable = false, length = 20)
    private String addressState;
 
-   @Column(name =  "addressStreet")
+   @Column(name =  "addressStreet", nullable = false, length = 255)
    private String addressStreet;
 
-   @Column(name =  "addressComplement")
+   @Column(name =  "addressComplement", nullable = false, length = 255)
    private String addressComplement;
 
-   @Column(name =  "addressNumber")
+   @Column(name =  "addressNumber", nullable = false)
    private Integer addressNumber;
 
    @ManyToOne(fetch = FetchType.LAZY)

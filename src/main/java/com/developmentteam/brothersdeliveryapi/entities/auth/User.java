@@ -1,5 +1,8 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.auth;
 
+import com.developmentteam.brothersdeliveryapi.entities.Store;
+import com.developmentteam.brothersdeliveryapi.entities.customers.Address;
+import com.developmentteam.brothersdeliveryapi.entities.customers.Card;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,19 +24,19 @@ public class User {
    @Column(name = "userId")
    private Long userId;
 
-   @Column(name = "userName")
+   @Column(name = "userName", nullable = false, length = 100)
    private String userName;
 
-   @Column(name = "userEmail")
+   @Column(name = "userEmail", nullable = false, length = 100)
    private String userEmail;
 
-   @Column(name = "userPassword")
+   @Column(name = "userPassword", nullable = false, length = 50)
    private String userPassword;
 
-   @Column(name = "userPhone")
+   @Column(name = "userPhone", nullable = false,  length = 15)
    private String userPhone;
 
-   @Column(name = "userCpf")
+   @Column(name = "userCpf", nullable = false, length = 30)
    private String userCpf;
 
    @OneToMany(mappedBy = "cardUser", fetch = FetchType.LAZY)

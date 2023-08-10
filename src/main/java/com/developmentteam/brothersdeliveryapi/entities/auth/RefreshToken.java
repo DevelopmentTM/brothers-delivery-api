@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.auth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +20,11 @@ public class RefreshToken {
    @Column(name = "refreshTokenId")
    private Long refreshTokenId;
 
-   @Column(name = "refreshCode")
-   private String refreshCode;
+   @Column(name = "refreshToken", nullable = false, length = 200)
+   private String refreshToken;
 
-   @Column(name = "refreshCodeExpiryAt")
-   private LocalDateTime refreshCodeExpiryAt;
+   @Column(name = "refreshCodeExpiryAt", nullable = false)
+   private LocalDateTime refreshTokenExpiryAt;
 
    @OneToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
