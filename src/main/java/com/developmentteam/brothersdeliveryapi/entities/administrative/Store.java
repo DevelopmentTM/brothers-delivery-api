@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.developmentteam.brothersdeliveryapi.entities.Order;
 import com.developmentteam.brothersdeliveryapi.entities.User;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
+import com.developmentteam.brothersdeliveryapi.entities.orders.Order;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

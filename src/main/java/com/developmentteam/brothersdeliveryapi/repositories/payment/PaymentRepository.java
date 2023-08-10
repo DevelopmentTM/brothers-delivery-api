@@ -1,0 +1,7 @@
+package com.developmentteam.brothersdeliveryapi.repositories.payment;
+
+import com.developmentteam.brothersdeliveryapi.entities.payment.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentRepository extends JpaRepository<Long, Payment> {
+}

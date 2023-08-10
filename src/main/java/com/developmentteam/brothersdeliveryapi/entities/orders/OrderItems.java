@@ -1,9 +1,21 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.orders;
 
+
+import com.developmentteam.brothersdeliveryapi.entities.OrderItemPrimaryKey;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
@@ -26,7 +38,7 @@ public class OrderItems {
     @JoinColumn(name = "productId", referencedColumnName = "productId", nullable = false)
     private Product product;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
 }

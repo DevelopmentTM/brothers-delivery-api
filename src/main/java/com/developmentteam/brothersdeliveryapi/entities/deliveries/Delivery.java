@@ -1,5 +1,6 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.deliveries;
 
+import com.developmentteam.brothersdeliveryapi.entities.orders.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,13 +17,13 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "deliveryId")
+    @Column(name = "deliveryId", nullable = false)
     private Long deliveryId;
 
-    @Column(name = "deliveryStart")
+    @Column(name = "deliveryStart", nullable = false)
     private LocalDateTime deliveryStart;
 
-    @Column(name = "deliveryEnd")
+    @Column(name = "deliveryEnd", nullable = false)
     private LocalDateTime deliveryEnd;
 
     @OneToMany(mappedBy = "occurrenceDelivery", fetch = FetchType.LAZY)

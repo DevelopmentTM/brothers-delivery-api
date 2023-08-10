@@ -1,5 +1,6 @@
-package com.developmentteam.brothersdeliveryapi.entities;
+package com.developmentteam.brothersdeliveryapi.entities.deliveries;
 
+import com.developmentteam.brothersdeliveryapi.entities.deliveries.Delivery;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,12 +16,13 @@ public class Occurrence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long occurrenceId;
+    @Column(name = "occurrenceId", nullable = false)
+    private Long occurrenceId;
 
-    @Column
+    @Column(name = "occurrenceDescription", nullable = false, length = 255)
     private String occurrenceDescription;
 
-    @Column
+    @Column(name = "occurrenceDate", nullable = false)
     private LocalDateTime occurrenceDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

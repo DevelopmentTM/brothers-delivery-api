@@ -3,8 +3,8 @@ package com.developmentteam.brothersdeliveryapi.entities.catalog;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.developmentteam.brothersdeliveryapi.entities.OrderItems;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
+import com.developmentteam.brothersdeliveryapi.entities.orders.OrderItems;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
