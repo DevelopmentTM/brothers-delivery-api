@@ -21,12 +21,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/db_dev_brothers_delivery
 
     #    dev-bruno
-    username: postgres
-    password: postg
+    # username: postgres
+    # password: postg
 
     #    dev-scooby
-#    username: postgres
-#    password: root
+    username: postgres
+    password: root
 
       #    dev-padrão
 #    username: postgres

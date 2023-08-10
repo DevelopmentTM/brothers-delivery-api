@@ -21,7 +21,7 @@ public class Payment {
     @Column(name = "paymentAmount")
     private BigDecimal paymentAmount;
 
-    @OneToOne(mappedBy = "orderPayment")
+    @OneToOne
     @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
     private Order paymentOrder;
 
