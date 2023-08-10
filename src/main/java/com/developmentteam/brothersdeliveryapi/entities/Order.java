@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

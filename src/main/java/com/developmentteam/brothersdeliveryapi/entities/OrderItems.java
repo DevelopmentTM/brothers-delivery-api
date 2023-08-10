@@ -1,5 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.entities;
 
+import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
+
 import jakarta.persistence.*;
 import lombok.*;
 

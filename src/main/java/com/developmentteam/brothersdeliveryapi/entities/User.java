@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
+
 @Setter
 @Getter
 @AllArgsConstructor
