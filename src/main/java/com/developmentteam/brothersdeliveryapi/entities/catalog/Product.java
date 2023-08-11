@@ -2,6 +2,7 @@ package com.developmentteam.brothersdeliveryapi.entities.catalog;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 import com.developmentteam.brothersdeliveryapi.entities.orders.OrderItems;
@@ -16,12 +17,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "product", schema = "public")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
