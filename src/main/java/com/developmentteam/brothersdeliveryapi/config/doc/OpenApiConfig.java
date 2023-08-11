@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
 )
 public class OpenApiConfig {
 
-   // link: http://localhost:8080/swagger-ui/index.html#/
+   // link: http://localhost:9000/swagger-ui/index.html#/
 
    public static final String SECURITY_SCHEME_NAME = "bearerToken";
 
