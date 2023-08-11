@@ -10,15 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "segment", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 public class Segment {
@@ -28,8 +26,8 @@ public class Segment {
     @Column(name = "segmentId")
     private Long segmentId;
 
-    @Column(name = "segmentNome", nullable = true, length = 50)
-    private String segmentNome;
+    @Column(name = "segmentName", nullable = true, length = 50)
+    private String segmentName;
 
     @Column(name = "segmentDescription", length = 255)
     private String segmentDescription;

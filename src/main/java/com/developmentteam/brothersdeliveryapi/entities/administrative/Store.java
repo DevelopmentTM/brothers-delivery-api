@@ -18,15 +18,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "store", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 public class Store {
@@ -46,7 +44,7 @@ public class Store {
     private BigDecimal assessment;
 
     @Column(name = "storeDeliveryStar", nullable = true)
-    private LocalDateTime storeDeliveryStar;
+    private LocalDateTime storeDeliveryStart;
 
     @Column(name = "storeDeliveryEnd", nullable = true)
     private LocalDateTime storeDeliveryEnd;
