@@ -4,10 +4,7 @@ package com.developmentteam.brothersdeliveryapi.entities.auth;
 import com.developmentteam.brothersdeliveryapi.entities.customers.Address;
 import com.developmentteam.brothersdeliveryapi.entities.customers.Card;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
