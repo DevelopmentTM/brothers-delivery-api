@@ -56,11 +56,8 @@ create table reset_Code (
     foreign key (user_id) references _user
 );
 
-<<<<<<< HEAD
-create table Category (
-=======
+
 create table category (
->>>>>>> dev
      category_id serial not null primary key ,
      category_name varchar(50) not null ,
      category_description varchar(255)
@@ -74,19 +71,11 @@ create table product (
 );
 
 create table product_category (
-<<<<<<< HEAD
-         productId integer not null ,
-         categoryId integer not null ,
-         foreign key (productId) references Category(category_id),
-         foreign key (categoryId) references Product(productId),
-         primary key (productId, categoryId)
-=======
          product_id integer not null ,
          category_id integer not null ,
          foreign key (product_id) references category(category_id),
          foreign key (category_id) references product(product_id),
          primary key (product_id, category_id)
->>>>>>> dev
 );
 
 create table segment (
@@ -100,7 +89,7 @@ create table store (
         store_name varchar(50) not null ,
         store_description varchar(255),
         segment_id integer,
-        assessment integer,
+        store_assessment integer,
         store_delivery_start timestamp not null ,
         store_delivery_end timestamp not null ,
         foreign key (segment_id) references segment(segment_id)

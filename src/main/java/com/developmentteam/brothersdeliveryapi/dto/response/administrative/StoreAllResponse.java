@@ -4,7 +4,6 @@ import com.developmentteam.brothersdeliveryapi.entities.administrative.Segment;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record StoreAllResponse(
@@ -15,7 +14,7 @@ public record StoreAllResponse(
 
         String storeDescription,
 
-        BigDecimal assessment,
+        Integer storeAssessment,
 
         LocalDateTime storeDeliveryStart,
 
@@ -29,7 +28,7 @@ public record StoreAllResponse(
                   store.getStoreId(),
                   store.getStoreName(),
                   store.getStoreDescription(),
-                  store.getAssessment(),
+                  store.getStoreAssessment(),
                   store.getStoreDeliveryStart(),
                   store.getStoreDeliveryEnd(),
                   store.getStoreSegment()
