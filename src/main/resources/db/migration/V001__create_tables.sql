@@ -57,9 +57,9 @@ create table Reset_Code (
 );
 
 create table Category (
-     categoryId serial not null primary key ,
-     categoryName varchar(50) not null ,
-     categoryDescription varchar(255)
+     category_id serial not null primary key ,
+     category_name varchar(50) not null ,
+     category_description varchar(255)
 );
 
 create table Product (
@@ -72,7 +72,7 @@ create table Product (
 create table product_category (
          productId integer not null ,
          categoryId integer not null ,
-         foreign key (productId) references Category(categoryId),
+         foreign key (productId) references Category(category_id),
          foreign key (categoryId) references Product(productId),
          primary key (productId, categoryId)
 );

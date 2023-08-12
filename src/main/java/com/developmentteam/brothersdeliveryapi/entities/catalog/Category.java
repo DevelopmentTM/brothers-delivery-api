@@ -29,20 +29,20 @@ public class Category {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "categoryId")
+    @Column(name = "category_id")
     private Long categoryId;
 
-    @Column(name = "categoryName", nullable = true, length = 50)
+    @Column(name = "category_name", nullable = true, length = 50)
     private String categoryName;
 
-    @Column(name = "categoryDescription", length = 255)
+    @Column(name = "category_description", length = 255)
     private String categoryDescription;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_category",
-            joinColumns = @JoinColumn(name = "categoryId"),
-            inverseJoinColumns = @JoinColumn(name = "productId")
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> categoryProducts;
 }

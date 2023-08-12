@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.dto.request;
+package com.developmentteam.brothersdeliveryapi.dto.request.catalog;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

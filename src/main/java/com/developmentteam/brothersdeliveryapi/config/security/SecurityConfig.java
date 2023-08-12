@@ -29,7 +29,7 @@ public class SecurityConfig {
                  AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
                  AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")
          ).permitAll();
-         requests.anyRequest().authenticated();
+         requests.anyRequest().permitAll();
       });
 
       return httpSecurity.build();

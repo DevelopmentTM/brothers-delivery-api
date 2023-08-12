@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.dto.response;
+package com.developmentteam.brothersdeliveryapi.dto.response.catalog;
 
 import java.io.Serializable;
 
