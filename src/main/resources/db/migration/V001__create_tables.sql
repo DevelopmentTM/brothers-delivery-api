@@ -1,152 +1,164 @@
-create table _User (
-    userId serial not null primary key,
-    userName varchar(100) not null ,
-    userEmail varchar(100) not null ,
-    userPassword varchar(50) not null ,
-    userPhone varchar(15) not null ,
-    userCpf varchar(30)
+create table _user (
+    user_id serial not null primary key,
+    user_name varchar(100) not null ,
+    user_email varchar(100) not null ,
+    user_password varchar(50) not null ,
+    user_phone varchar(15) not null ,
+    user_cpf varchar(30)
 );
 
-create table Card (
-    cardId serial not null primary key ,
-    cardNumber integer not null ,
-    cardCvv varchar(3) not null ,
-    cardExpiration timestamp not null,
-    userId integer not null ,
-    foreign key (userId) references _User
+create table card (
+    card_id serial not null primary key ,
+    card_number integer not null ,
+    card_cvv varchar(3) not null ,
+    card_expiration timestamp not null,
+    user_id integer not null ,
+    foreign key (user_id) references _user
 );
 
-create table Address (
-    addressId serial not null primary key ,
-    addressCity varchar(40) not null ,
-    addressState varchar(20) not null ,
-    addressStreet varchar(255) not null,
-    addressComplement varchar(255) not null ,
-    addressNumber integer not null,
-    userId integer not null ,
-    foreign key (userId) references _User
+create table address (
+    address_id serial not null primary key ,
+    address_city varchar(40) not null ,
+    address_state varchar(20) not null ,
+    address_street varchar(255) not null,
+    address_complement varchar(255) not null ,
+    address_number integer not null,
+    user_id integer not null ,
+    foreign key (user_id) references _user
 );
 
-create table Role (
-    roleId serial not null primary key ,
-    roleName varchar(20) not null
+create table role (
+    role_id serial not null primary key ,
+    role_name varchar(20) not null
 );
 
 create table user_roles (
-    userId integer not null,
-    roleId integer not null,
-    foreign key (roleId) references Role,
-    foreign key (userId) references _User,
-    primary key (userId, roleId)
+    user_id integer not null,
+    role_id integer not null,
+    foreign key (role_id) references role,
+    foreign key (user_id) references _user,
+    primary key (user_id, role_id)
 );
 
-create table Refresh_Token (
-    refreshTokenId integer not null PRIMARY KEY ,
-    refreshToken varchar(200) not null,
-    refreshTokenExpiryAt timestamp not null ,
-    userId integer not null ,
-    foreign key (userId) references _User
+create table refresh_token (
+    refresh_token_id integer not null PRIMARY KEY ,
+    refresh_token varchar(200) not null,
+    refresh_token_expiry_at timestamp not null ,
+    user_id integer not null ,
+    foreign key (user_id) references _user
 );
 
-create table Reset_Code (
-    resetCodeId integer not null ,
-    resetCode integer not null ,
-    resetCodeExpiryAt timestamp not null ,
-    userId integer not null ,
-    foreign key (userId) references _User
+create table reset_Code (
+    reset_code_id integer not null ,
+    reset_code integer not null ,
+    reset_code_expiry_at timestamp not null ,
+    user_id integer not null ,
+    foreign key (user_id) references _user
 );
 
+<<<<<<< HEAD
 create table Category (
+=======
+create table category (
+>>>>>>> dev
      category_id serial not null primary key ,
      category_name varchar(50) not null ,
      category_description varchar(255)
 );
 
-create table Product (
-        productId serial not null primary key ,
-        ProductName varchar(50) not null ,
-        productDescription varchar(255) not null ,
-        productPrice double precision not null
+create table product (
+        product_id serial not null primary key ,
+        Product_name varchar(50) not null ,
+        product_description varchar(255) not null ,
+        product_price double precision not null
 );
 
 create table product_category (
+<<<<<<< HEAD
          productId integer not null ,
          categoryId integer not null ,
          foreign key (productId) references Category(category_id),
          foreign key (categoryId) references Product(productId),
          primary key (productId, categoryId)
+=======
+         product_id integer not null ,
+         category_id integer not null ,
+         foreign key (product_id) references category(category_id),
+         foreign key (category_id) references product(product_id),
+         primary key (product_id, category_id)
+>>>>>>> dev
 );
 
-create table Segment (
-        segmentId serial not null primary key ,
-        segmentName varchar(50) not null ,
-        segmentDescription varchar(255)
+create table segment (
+        segment_id serial not null primary key ,
+        segment_name varchar(50) not null ,
+        segment_description varchar(255)
 );
 
-create table Store (
-      storeId serial not null primary key ,
-      storeName varchar(50) not null ,
-      storeDescription varchar(255),
-     segmentId integer,
-     assessment integer,
-     storeDeliveryStar timestamp not null ,
-     storeDeliveryEnd timestamp not null ,
-     foreign key (segmentId) references Segment(segmentId)
+create table store (
+        store_id serial not null primary key ,
+        store_name varchar(50) not null ,
+        store_description varchar(255),
+        segment_id integer,
+        assessment integer,
+        store_delivery_start timestamp not null ,
+        store_delivery_end timestamp not null ,
+        foreign key (segment_id) references segment(segment_id)
 );
 
 create table product_store(
-          storeId integer not null ,
-          productId integer not null ,
-          foreign key (storeId) references Store(storeId),
-          foreign key (productId) references Product(productId),
-          primary key (storeId, productId)
+          store_id integer not null ,
+          product_id integer not null ,
+          foreign key (store_id) references store(store_id),
+          foreign key (product_id) references product(product_id),
+          primary key (store_id, product_id)
 );
 
-create table _Order (
-        orderId serial not null primary key,
-        orderAddressId Bigint not null,
-        order_UserId Bigint not null,
-        orderStatus varchar(20) not null,
-        storeId Bigint not null,
-        foreign key (storeId) references Store
+create table _order (
+        order_id serial not null primary key,
+        order_address_id Bigint not null,
+        order_user_id Bigint not null,
+        order_status varchar(20) not null,
+        store_id Bigint not null,
+        foreign key (store_id) references store
 );
 
-create table Delivery (
-      deliveryId serial not null primary key,
-      deliveryStart timestamp not null,
-      deliveryEnd timestamp not null,
-      orderId integer not null ,
-      foreign key (orderId) references _Order
+create table delivery (
+      delivery_id serial not null primary key,
+      delivery_start timestamp not null,
+      delivery_end timestamp not null,
+      order_id integer not null ,
+      foreign key (order_id) references _order
 );
 
-create table Occurrences (
-        occurrenceId serial not null primary key,
-        occurrenceDescription varchar(255) not null,
-        occurrenceDate timestamp not null,
-        deliveryId Bigint not null ,
-        foreign key (deliveryId) references Delivery
+create table occurrences (
+        occurrence_id serial not null primary key,
+        occurrence_description varchar(255) not null,
+        occurrence_date timestamp not null,
+        delivery_id Bigint not null ,
+        foreign key (delivery_id) references delivery
 );
 
-create table Payment (
-            paymentId serial not null primary key,
-            paymentAmount double precision not null,
-            orderId Bigint not null,
-            foreign key (orderId) references _Order
+create table payment (
+            payment_id serial not null primary key,
+            payment_amount double precision not null,
+            order_id Bigint not null,
+            foreign key (order_id) references _order
 );
 
 create table order_items (
-            orderId serial not null ,
-            productId serial not null ,
+            order_id serial not null ,
+            product_id serial not null ,
             quantity Bigint not null,
-            foreign key (orderId) references _Order,
-            foreign key (productId) references Product,
-            primary key (orderId, productId)
+            foreign key (order_id) references _order,
+            foreign key (product_id) references product,
+            primary key (order_id, product_id)
 );
 
-create table Favorites (
-          userId serial not null ,
-          storeId serial not null,
-          foreign key (userId) references _User,
-          foreign key (storeId) references Store,
-          primary key (userId, storeId)
+create table favorites (
+          user_id serial not null ,
+          store_id serial not null,
+          foreign key (user_id) references _user,
+          foreign key (store_id) references store,
+          primary key (user_id, store_id)
 );

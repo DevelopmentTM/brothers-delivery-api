@@ -1,7 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.exceptions.handler;
 
-import com.developmentteam.brothersdeliveryapi.exceptions.body.ApiErrorBody;
-import com.developmentteam.brothersdeliveryapi.exceptions.body.ValidateExceptionBody;
+import com.developmentteam.brothersdeliveryapi.exceptions.body.ApiErrorResponse;
+import com.developmentteam.brothersdeliveryapi.exceptions.body.ValidateExceptionResponse;
 import com.developmentteam.brothersdeliveryapi.exceptions.custom.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +26,14 @@ public class RestExceptionHandler {
    private final MessageSource messageSource;
 
    @ExceptionHandler({  MethodArgumentNotValidException.class })
-   public ResponseEntity<ApiErrorBody> handleArgumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request, Locale locale) {
+   public ResponseEntity<ApiErrorResponse> handleArgumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request, Locale locale) {
 
       List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
       var fieldList = processFieldError(fieldErrors);
 
       var httpStatus = HttpStatus.BAD_REQUEST;
 
-      ApiErrorBody apiErrorBody = ValidateExceptionBody.builder()
+      ApiErrorResponse apiErrorResponse = ValidateExceptionResponse.builder()
               .status(httpStatus.value())
               .error(ex.getClass().getName())
               .message(ex.getMessage())
@@ -42,20 +42,20 @@ public class RestExceptionHandler {
               .fields(fieldList)
               .build();
 
-      return ResponseEntity.status(httpStatus).body(apiErrorBody);
+      return ResponseEntity.status(httpStatus).body(apiErrorResponse);
    }
 
-   private List<ValidateExceptionBody.Field> processFieldError(List<FieldError> fieldErrors) {
+   private List<ValidateExceptionResponse.Field> processFieldError(List<FieldError> fieldErrors) {
       return  fieldErrors.stream()
-              .map(fieldError ->  ValidateExceptionBody.Field.builder()
+              .map(fieldError ->  ValidateExceptionResponse.Field.builder()
                       .fieldName(fieldError.getField())
                       .fieldErrorMessage(fieldError.getDefaultMessage())
               .build()
       ).toList();
    }
 
-   private ApiErrorBody toApiErrorBody(HttpStatus httpStatus,  Throwable ex, HttpServletRequest request) {
-      return  ApiErrorBody.builder()
+   private ApiErrorResponse toApiErrorBody(HttpStatus httpStatus, Throwable ex, HttpServletRequest request) {
+      return  ApiErrorResponse.builder()
               .status(httpStatus.value())
               .error(ex.getClass().getSimpleName())
               .message(ex.getMessage())
@@ -69,7 +69,7 @@ public class RestExceptionHandler {
    }
 
    @ExceptionHandler({ ResourceNotFoundException.class })
-   public ResponseEntity<ApiErrorBody> handleResourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
+   public ResponseEntity<ApiErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
       HttpStatus httpStatus = this.getStatusOfExceptionClass(ex);
       var apiErrorBody = this.toApiErrorBody(httpStatus, ex, request);
       return ResponseEntity.status(httpStatus).body(apiErrorBody);

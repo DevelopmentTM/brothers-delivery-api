@@ -33,16 +33,16 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId")
+    @Column(name = "product_id")
     private Long productId;
 
-    @Column(name = "productName", nullable = true, length = 50 )
+    @Column(name = "product_name", nullable = true, length = 50 )
     private String productName;
 
-    @Column(name = "productDescription", nullable = true, length = 255)
+    @Column(name = "product_description", nullable = true, length = 255)
     private String productDescription;
 
-    @Column(name = "productPrice", nullable = true)
+    @Column(name = "product_price", nullable = true)
     private BigDecimal productPrice;
 
     @ManyToMany(mappedBy = "storeProducts", fetch = FetchType.LAZY)

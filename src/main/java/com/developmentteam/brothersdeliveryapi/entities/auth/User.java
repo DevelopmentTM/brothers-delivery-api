@@ -21,22 +21,22 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "userId")
+   @Column(name = "user_id")
    private Long userId;
 
-   @Column(name = "userName", nullable = false, length = 100)
+   @Column(name = "user_name", nullable = false, length = 100)
    private String userName;
 
-   @Column(name = "userEmail", nullable = false, length = 100)
+   @Column(name = "user_email", nullable = false, length = 100)
    private String userEmail;
 
-   @Column(name = "userPassword", nullable = false, length = 50)
+   @Column(name = "user_password", nullable = false, length = 50)
    private String userPassword;
 
-   @Column(name = "userPhone", nullable = false,  length = 15)
+   @Column(name = "user_phone", nullable = false,  length = 15)
    private String userPhone;
 
-   @Column(name = "userCpf", nullable = false, length = 30)
+   @Column(name = "user_cpf", nullable = false, length = 30)
    private String userCpf;
 
    @OneToMany(mappedBy = "cardUser", fetch = FetchType.LAZY)
@@ -54,16 +54,16 @@ public class User {
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
            name = "user_roles",
-           joinColumns = @JoinColumn(name = "userId"),
-           inverseJoinColumns = @JoinColumn(name = "roleId")
+           joinColumns = @JoinColumn(name = "user_id"),
+           inverseJoinColumns = @JoinColumn(name = "role_id")
    )
    private List<Role> userRoles;
 
    @ManyToMany(fetch = FetchType.LAZY)
    @JoinTable(
            name = "Favorites",
-           joinColumns = @JoinColumn(name = "userId"),
-           inverseJoinColumns = @JoinColumn(name = "storeId")
+           joinColumns = @JoinColumn(name = "user_id"),
+           inverseJoinColumns = @JoinColumn(name = "store_id")
    )
    private List<Store> userStores;
 

@@ -17,20 +17,20 @@ public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "deliveryId", nullable = false)
+    @Column(name = "delivery_id", nullable = false)
     private Long deliveryId;
 
-    @Column(name = "deliveryStart", nullable = false)
+    @Column(name = "delivery_start", nullable = false)
     private LocalDateTime deliveryStart;
 
-    @Column(name = "deliveryEnd", nullable = false)
+    @Column(name = "delivery_end", nullable = false)
     private LocalDateTime deliveryEnd;
 
     @OneToMany(mappedBy = "occurrenceDelivery", fetch = FetchType.LAZY)
     private List<Occurrence> deliveryOccurrence;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     private Order deliveryOrder;
 
 }

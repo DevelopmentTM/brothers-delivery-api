@@ -23,13 +23,13 @@ public class Segment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "segmentId")
+    @Column(name = "segment_id")
     private Long segmentId;
 
-    @Column(name = "segmentName", nullable = true, length = 50)
+    @Column(name = "segment_name", nullable = true, length = 50)
     private String segmentName;
 
-    @Column(name = "segmentDescription", length = 255)
+    @Column(name = "segment_description", length = 255)
     private String segmentDescription;
 
     @OneToMany(mappedBy = "storeSegment", fetch = FetchType.LAZY)

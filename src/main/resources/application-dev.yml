@@ -25,8 +25,8 @@ spring:
 #    password: root
 
     #    dev-bruno
-#    username: postgres
-#    password: postg
+    # username: postgres
+    # password: postg
 
     #    dev-scooby
     username: postgres

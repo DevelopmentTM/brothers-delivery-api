@@ -25,10 +25,12 @@ public class SecurityConfig {
       });
 
       httpSecurity.authorizeHttpRequests(requests -> {
+
          requests.requestMatchers(
-                 AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
-                 AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")
-         ).permitAll();
+               AntPathRequestMatcher.antMatcher("/api/auth/**"),
+               AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
+               AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")).permitAll();
+
          requests.anyRequest().permitAll();
       });
 

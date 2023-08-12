@@ -1,5 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.dto.response.administrative;
 
+import com.developmentteam.brothersdeliveryapi.entities.administrative.Segment;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 
 import java.io.Serializable;
@@ -14,11 +15,13 @@ public record StoreAllResponse(
 
         String storeDescription,
 
+        BigDecimal assessment,
+
         LocalDateTime storeDeliveryStart,
 
         LocalDateTime storeDeliveryEnd,
 
-        BigDecimal assessment) implements Serializable {
+        Segment storeSegment) implements Serializable {
 
         public static StoreAllResponse toResponse(Store store) {
 
@@ -26,9 +29,10 @@ public record StoreAllResponse(
                   store.getStoreId(),
                   store.getStoreName(),
                   store.getStoreDescription(),
+                  store.getAssessment(),
                   store.getStoreDeliveryStart(),
                   store.getStoreDeliveryEnd(),
-                  store.getAssessment()
+                  store.getStoreSegment()
                 );
         }
 }

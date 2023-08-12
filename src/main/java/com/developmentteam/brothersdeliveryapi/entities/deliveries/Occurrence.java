@@ -16,17 +16,17 @@ public class Occurrence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "occurrenceId", nullable = false)
+    @Column(name = "occurrence_id", nullable = false)
     private Long occurrenceId;
 
-    @Column(name = "occurrenceDescription", nullable = false, length = 255)
+    @Column(name = "occurrence_description", nullable = false, length = 255)
     private String occurrenceDescription;
 
-    @Column(name = "occurrenceDate", nullable = false)
+    @Column(name = "occurrence_date", nullable = false)
     private LocalDateTime occurrenceDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deliveryId", referencedColumnName = "deliveryId", nullable = false)
+    @JoinColumn(name = "delivery_id", referencedColumnName = "delivery_id", nullable = false)
     private Delivery occurrenceDelivery;
 
 }

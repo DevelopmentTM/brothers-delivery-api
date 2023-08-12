@@ -31,33 +31,33 @@ public class Store {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "storeId")
+    @Column(name = "store_id")
     private Long storeId;
 
-    @Column(name = "storeName", nullable = true, length = 50)
+    @Column(name = "store_name", nullable = true, length = 50)
     private String storeName;
 
-    @Column(name = "storeDescription", length = 255)
+    @Column(name = "store_description", length = 255)
     private String storeDescription;
 
-    @Column(name = "assessment")
-    private BigDecimal assessment;
+    @Column(name = "store_assessment")
+    private Integer storeAssessment;
 
-    @Column(name = "storeDeliveryStar", nullable = true)
+    @Column(name = "store_delivery_start", nullable = true)
     private LocalDateTime storeDeliveryStart;
 
-    @Column(name = "storeDeliveryEnd", nullable = true)
+    @Column(name = "store_delivery_end", nullable = true)
     private LocalDateTime storeDeliveryEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "segmentId", referencedColumnName = "segmentId", nullable = false)
+    @JoinColumn(name = "segment_id", referencedColumnName = "segment_id", nullable = false)
     private Segment storeSegment;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "store_products",
-            joinColumns = @JoinColumn(name = "storeId"),
-            inverseJoinColumns = @JoinColumn(name = "productId")
+            joinColumns = @JoinColumn(name = "store_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> storeProducts;
 
