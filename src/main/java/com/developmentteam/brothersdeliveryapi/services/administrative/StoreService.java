@@ -2,8 +2,10 @@ package com.developmentteam.brothersdeliveryapi.services.administrative;
 
 import com.developmentteam.brothersdeliveryapi.dto.request.administrative.StoreRequest;
 import com.developmentteam.brothersdeliveryapi.dto.response.administrative.StoreAllResponse;
+import com.developmentteam.brothersdeliveryapi.dto.response.administrative.StoreOrdersResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.administrative.StoreResponse;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
+import com.developmentteam.brothersdeliveryapi.repositories.orders.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import com.developmentteam.brothersdeliveryapi.repositories.administrative.StoreRepository;
@@ -17,6 +19,8 @@ import java.util.List;
 public class StoreService {
     
     private final StoreRepository storeRepository;
+
+    private final OrderRepository orderRepository;
 
     public StoreResponse createStore(StoreRequest request) {
         Store store = Store.builder()
@@ -38,5 +42,12 @@ public class StoreService {
         return storeRepository.findAll().stream().map(StoreAllResponse::toResponse).toList();
     }
 
+    public StoreAllResponse findById(Long id) {
+        return storeRepository.findById(id).map(StoreAllResponse::toResponse).orElseThrow();
+    }
+
+    public List<StoreOrdersResponse> findOrdersById(Long id) {
+        return orderRepository.findAllOrderByStoreId(id).stream().map(StoreOrdersResponse::toResponse).toList();
+    }
 
 }
