@@ -50,8 +50,8 @@ public class Store {
     private LocalDateTime storeDeliveryEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "segment_id", referencedColumnName = "segment_id", nullable = false)
-    private Segment storeSegment;
+    @JoinColumn(name = "segment_id", referencedColumnName = "segment_id", nullable = true)
+    public Segment storeSegment;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

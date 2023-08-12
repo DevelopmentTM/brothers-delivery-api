@@ -1,24 +1,19 @@
-package com.developmentteam.brothersdeliveryapi.dto.response.administrative;
+package com.developmentteam.brothersdeliveryapi.dto.response.administrative.segment;
 
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Segment;
 
 import java.io.Serializable;
 
-public record SegmentAllResponse(
-
-        Long segmentId,
+public record SegmentUpdateResponse(
 
         String segmentName,
-
         String segmentDescription) implements Serializable {
 
-    public static SegmentAllResponse toResponse(Segment segment) {
+    public static SegmentUpdateResponse toResponse(Segment segment) {
 
-        return new SegmentAllResponse(
-                segment.getSegmentId(),
+        return new SegmentUpdateResponse(
                 segment.getSegmentName(),
                 segment.getSegmentDescription()
         );
     }
-
 }

@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.dto.response.administrative;
+package com.developmentteam.brothersdeliveryapi.dto.response.administrative.store;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
