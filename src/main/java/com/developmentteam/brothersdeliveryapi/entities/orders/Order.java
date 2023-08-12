@@ -19,16 +19,19 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orderId", nullable = false)
+    @Column(name = "order_id", nullable = false)
     private Long orderId;
 
-    @Column(name =  "orderAddressId", nullable = false)
+    @Column(name =  "order_address_id", nullable = false)
     private Long orderAddressId;
 
-    @Column(name =  "orderCardId", nullable = false)
+    @Column(name =  "order_card_id", nullable = false)
     private Long orderCardId;
 
-    @Column(name =  "orderStatus", nullable = false, length = 20)
+    @Column(name= "order_user_id", nullable = false)
+    private Long orderUserId;
+
+    @Column(name =  "order_status", nullable = false, length = 20)
     private String orderStatus;
 
     @OneToOne(mappedBy = "deliveryOrder")
@@ -38,7 +41,7 @@ public class Order {
     private Payment orderPayment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storeId", referencedColumnName = "storeId", nullable = false)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
     private Store orderStore;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)

@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public sealed  class ApiErrorBody implements Serializable permits ValidateExceptionBody {
+public sealed class ApiErrorResponse implements Serializable permits ValidateExceptionResponse {
 
    protected  Integer status;
    protected  String error;

@@ -19,17 +19,17 @@ public class ResetCode {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "resetCodeId")
+   @Column(name = "reset_code_id")
    private Long resetCodeId;
 
-   @Column(name =  "resetCode", nullable = false, length = 255)
+   @Column(name =  "reset_code", nullable = false, length = 255)
    private Integer resetCode;
 
-   @Column(name =  "resetCodeExpiryAt", nullable = false)
+   @Column(name =  "reset_code_expiry_at", nullable = false)
    private LocalDateTime resetCodeExpiryAt;
 
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
+   @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
    private User resetCodeUser;
 
 }

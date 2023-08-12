@@ -14,10 +14,10 @@ import java.io.Serializable;
 @Embeddable
 public class OrderItemPrimaryKey implements Serializable {
 
-    @Column(name = "orderId")
+    @Column(name = "order_id")
     private Long orderId;
 
-    @Column(name = "productId")
+    @Column(name = "product_id")
     private Long productId;
 
 }

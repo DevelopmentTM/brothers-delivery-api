@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public non-sealed class ValidateExceptionBody extends ApiErrorBody {
+public non-sealed class ValidateExceptionResponse extends ApiErrorResponse {
 
    private List<Field> fields;
 

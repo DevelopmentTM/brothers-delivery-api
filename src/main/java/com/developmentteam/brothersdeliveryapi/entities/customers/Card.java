@@ -17,20 +17,20 @@ public class Card {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "cardId")
+   @Column(name = "card_id")
    private Long cardId;
 
-   @Column(name = "cardNumber", nullable = false)
+   @Column(name = "card_number", nullable = false)
    private Integer cardNumber;
 
-   @Column(name = "cardCvv", nullable = false, length = 3)
+   @Column(name = "card_cvv", nullable = false, length = 3)
    private String cardCvv;
 
-   @Column(name = "cardExpiration", nullable = false)
+   @Column(name = "card_expiration", nullable = false)
    private String cardExpiration;
 
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
+   @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
    private User cardUser;
 
 }

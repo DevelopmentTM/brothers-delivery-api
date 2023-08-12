@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -25,11 +24,13 @@ public class SecurityConfig {
       });
 
       httpSecurity.authorizeHttpRequests(requests -> {
-         requests.requestMatchers(
-                 AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
-                 AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")
-         ).permitAll();
-         requests.anyRequest().authenticated();
+//         requests.requestMatchers(
+//                 AntPathRequestMatcher.antMatcher("/api/auth/**"),
+//                 AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
+//                 AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")
+//         ).permitAll();
+
+         requests.anyRequest().permitAll();
       });
 
       return httpSecurity.build();

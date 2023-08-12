@@ -19,10 +19,10 @@ public class Role {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "roleId")
+   @Column(name = "role_id")
    private Long roleId;
 
-   @Column(name =  "roleName")
+   @Column(name =  "role_name")
    private String roleName;
 
    @ManyToMany(mappedBy = "userRoles", fetch = FetchType.LAZY)

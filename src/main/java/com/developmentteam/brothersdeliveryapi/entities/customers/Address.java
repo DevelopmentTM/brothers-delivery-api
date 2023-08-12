@@ -17,25 +17,25 @@ public class Address {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name =  "addressId")
+   @Column(name =  "address_id")
    private Long addressId;
 
-   @Column(name =  "addressCity", nullable = false, length = 40)
+   @Column(name =  "address_city", nullable = false, length = 40)
    private String addressCity;
 
-   @Column(name =  "addressState", nullable = false, length = 20)
+   @Column(name =  "address_state", nullable = false, length = 20)
    private String addressState;
 
-   @Column(name =  "addressStreet", nullable = false, length = 255)
+   @Column(name =  "address_street", nullable = false, length = 255)
    private String addressStreet;
 
-   @Column(name =  "addressComplement", nullable = false, length = 255)
+   @Column(name =  "address_complement", nullable = false, length = 255)
    private String addressComplement;
 
-   @Column(name =  "addressNumber", nullable = false)
+   @Column(name =  "address_number", nullable = false)
    private Integer addressNumber;
 
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
+   @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
    private User addressUser;
 }
