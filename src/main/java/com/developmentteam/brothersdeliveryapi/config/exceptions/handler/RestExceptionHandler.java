@@ -1,8 +1,8 @@
-package com.developmentteam.brothersdeliveryapi.exceptions.handler;
+package com.developmentteam.brothersdeliveryapi.config.exceptions.handler;
 
-import com.developmentteam.brothersdeliveryapi.exceptions.body.ApiErrorResponse;
-import com.developmentteam.brothersdeliveryapi.exceptions.body.ValidateExceptionResponse;
-import com.developmentteam.brothersdeliveryapi.exceptions.custom.ResourceNotFoundException;
+import com.developmentteam.brothersdeliveryapi.config.exceptions.body.ApiErrorResponse;
+import com.developmentteam.brothersdeliveryapi.config.exceptions.body.ValidateExceptionResponse;
+import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

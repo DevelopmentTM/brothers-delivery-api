@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.exceptions.body;
+package com.developmentteam.brothersdeliveryapi.config.exceptions.body;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

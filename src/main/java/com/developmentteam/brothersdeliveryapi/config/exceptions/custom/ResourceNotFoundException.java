@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.exceptions.custom;
+package com.developmentteam.brothersdeliveryapi.config.exceptions.custom;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

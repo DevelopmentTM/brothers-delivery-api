@@ -16,14 +16,14 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paymentId", nullable = false)
+    @Column(name = "payment_id", nullable = false)
     private Long paymentId;
 
-    @Column(name = "paymentAmount", nullable = false)
+    @Column(name = "payment_amount", nullable = false)
     private BigDecimal paymentAmount;
 
     @OneToOne
-    @JoinColumn(name = "orderId", referencedColumnName = "orderId", nullable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     private Order paymentOrder;
 
 }

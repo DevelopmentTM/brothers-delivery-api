@@ -29,12 +29,12 @@ public class OrderItems {
     private OrderItemPrimaryKey orderItemId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("orderId")
+    @MapsId("order_id")
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("productId")
+    @MapsId("product_id")
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     private Product product;
 
