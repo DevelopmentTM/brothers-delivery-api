@@ -6,7 +6,6 @@ spring:
     database: POSTGRESQL
     show-sql: true
     open-in-view: false
-
     hibernate:
       ddl-auto: none
 

@@ -1,7 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.entities.orders;
 
 
-import com.developmentteam.brothersdeliveryapi.entities.OrderItemPrimaryKey;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
 
 import jakarta.persistence.Column;
