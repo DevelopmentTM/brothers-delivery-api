@@ -1,16 +1,12 @@
 package com.developmentteam.brothersdeliveryapi.entities.auth;
 
-import com.developmentteam.brothersdeliveryapi.entities.auth.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,6 +23,9 @@ public class ResetCode {
 
    @Column(name =  "reset_code_expiry_at", nullable = false)
    private LocalDateTime resetCodeExpiryAt;
+
+   @Column(name = "reset_code_active", nullable = false)
+   private boolean resetCodeActive;
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)

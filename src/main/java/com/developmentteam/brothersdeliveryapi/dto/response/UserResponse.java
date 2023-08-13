@@ -1,5 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.dto.response;
 
+import com.developmentteam.brothersdeliveryapi.entities.auth.User;
+
 import java.io.Serializable;
 
 public record UserResponse(
@@ -10,11 +12,11 @@ public record UserResponse(
 
 ) implements Serializable {
 
-   public static UserResponse toResponse(String name, String email, String password) {
+   public static UserResponse toResponse(User user) {
       return new UserResponse(
-              name,
-              email,
-              password
+              user.getUserName(),
+              user.getUserEmail(),
+              user.getUserPhone()
       );
    }
 

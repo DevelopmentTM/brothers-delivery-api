@@ -24,7 +24,7 @@ public class UserService {
 
       User userSaved = userRepository.save(user);
 
-      return UserResponse.toResponse(userSaved.getUserName(), userSaved.getUserEmail(), userSaved.getUserPassword());
+      return UserResponse.toResponse(userSaved);
    }
 
 }
