@@ -1,6 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.services.auth;
 
-import com.developmentteam.brothersdeliveryapi.config.Messages.ExceptionMessages;
+import com.developmentteam.brothersdeliveryapi.config.messages.ExceptionMessages;
 import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ApiAuthException;
 import com.developmentteam.brothersdeliveryapi.entities.auth.RefreshToken;
 import com.developmentteam.brothersdeliveryapi.entities.auth.User;

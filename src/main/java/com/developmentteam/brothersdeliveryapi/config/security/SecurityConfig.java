@@ -2,12 +2,13 @@ package com.developmentteam.brothersdeliveryapi.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -24,17 +25,18 @@ public class SecurityConfig {
          header.frameOptions().sameOrigin();
       });
 
-      httpSecurity.authorizeHttpRequests(requests -> {
-
-         requests.requestMatchers(
-               AntPathRequestMatcher.antMatcher("/api/auth/**"),
-               AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
-               AntPathRequestMatcher.antMatcher("/brothers-delivery-api-docs/**")).permitAll();
-
-         requests.anyRequest().permitAll();
-      });
+      httpSecurity.authorizeHttpRequests(this::accessPermissions);
 
       return httpSecurity.build();
    }
 
+   private void accessPermissions(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authRequest) {
+      authRequest.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
+
+      authRequest.requestMatchers("/api/auth/**").permitAll();
+      authRequest.requestMatchers("/swagger-ui/**").permitAll();
+      authRequest.requestMatchers("/brothers-delivery-api-docs/**").permitAll();
+
+      authRequest.anyRequest().permitAll();
+   }
 }

@@ -39,8 +39,14 @@ public class ApiResponse<T> {
       }
 
       public ResponseEntity<ApiResponse<T>> build() {
-         ApiResponse<T> apiResponse = new ApiResponse<>(httpStatus.value(), response);
-         return ResponseEntity.status(httpStatus).body(apiResponse);
+         ApiResponse<T> apiResponse = new ApiResponse<>(
+                 this.httpStatus.value(), response
+         );
+
+         return ResponseEntity
+                 .status(this.httpStatus)
+                 .headers(this.httpHeaders)
+                 .body(apiResponse);
       }
    }
 }

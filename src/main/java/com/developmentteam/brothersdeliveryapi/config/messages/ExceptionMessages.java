@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.config.Messages;
+package com.developmentteam.brothersdeliveryapi.config.messages;
 
 public enum ExceptionMessages {
 
