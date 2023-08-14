@@ -2,19 +2,18 @@ package com.developmentteam.brothersdeliveryapi.controllers.catalog;
 
 import java.util.List;
 
+import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryCreateRequest;
+import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryCreateRequest;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryCreateResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryResponse;
 import com.developmentteam.brothersdeliveryapi.services.catalog.CategoryService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,13 +23,26 @@ public class CategoryController {
     
     private final CategoryService categoryService;
 
-    @PostMapping("")
-    public ResponseEntity<CategoryCreateResponse> create(@RequestBody CategoryCreateRequest categoryCreateRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryCreateRequest));
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public CategoryCreateResponse create(@RequestBody @Valid CategoryCreateRequest categoryCreateRequest){
+        return categoryService.createCategory(categoryCreateRequest);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<CategoryResponse>> allCategory(){
         return ResponseEntity.ok().body(categoryService.allCategory());
+    }
+
+    @PutMapping
+    public ResponseEntity<CategoryResponse> updateCategory(@RequestBody CategoryUpdateRequest categoryUpdateRequest){
+        return ResponseEntity.ok().body(categoryService.updateCategory(categoryUpdateRequest));
+    }
+
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable Long id){
+        categoryService.deleteCategory(id);
     }
 }

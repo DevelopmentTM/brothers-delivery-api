@@ -3,11 +3,13 @@ package com.developmentteam.brothersdeliveryapi.services.catalog;
 import java.util.List;
 import java.util.Optional;
 
+import com.developmentteam.brothersdeliveryapi.dto.request.catalog.ProductUpdateRequest;
+import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductCreateResponse;
+import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductUpdateResponse;
 import org.springframework.stereotype.Service;
 
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.ProductCreateRequest;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductAllResponse;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductCreateResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductResponse;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Category;
@@ -45,7 +47,7 @@ public class ProductService {
 
         Product productSaved = productRepository.save(product);
 
-        return ProductCreateResponse.toResponse(productSaved.getProductId() ,productSaved.getProductName());
+        return ProductCreateResponse.toResponse(productSaved);
         
     }
 
@@ -57,9 +59,25 @@ public class ProductService {
 
         Optional<Product> productFind = productRepository.findById(id);
 
-        
+        System.out.println(productFind.get().toString());
 
-        return null;
+        return ProductResponse.toResponse(productFind.get(), null, null);
+    }
+
+    public void deleteProduct(Long id){
+        productRepository.deleteById(id);
+    }
+
+    public ProductUpdateResponse updateProduct(ProductUpdateRequest productUpdateRequest){
+
+        Product product = Product.builder()
+                .productId(productUpdateRequest.id())
+                .productName(productUpdateRequest.name())
+                .productDescription(productUpdateRequest.description())
+                .build();
+        productRepository.save(product);
+
+        return ProductUpdateResponse.toResponse(product);
     }
 
 }

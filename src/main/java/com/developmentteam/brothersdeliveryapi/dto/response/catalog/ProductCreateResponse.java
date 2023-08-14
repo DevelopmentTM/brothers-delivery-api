@@ -1,12 +1,25 @@
 package com.developmentteam.brothersdeliveryapi.dto.response.catalog;
 
+import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 public record ProductCreateResponse(
+        Long id,
 
-    Long id,
-    String nome
+        String name,
 
-) {
-    public static ProductCreateResponse toResponse(Long id, String nome){
-        return new ProductCreateResponse(id, nome);
+        String description,
+
+        BigDecimal price
+)implements Serializable {
+    public static ProductCreateResponse toResponse(Product product){
+        return new ProductCreateResponse(
+                product.getProductId(),
+                product.getProductName(),
+                product.getProductDescription(),
+                product.getProductPrice()
+        );
     }
 }

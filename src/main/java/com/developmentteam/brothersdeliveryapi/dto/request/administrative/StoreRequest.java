@@ -1,5 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.dto.request.administrative;
 
+import com.developmentteam.brothersdeliveryapi.entities.administrative.Segment;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,10 +17,13 @@ public record StoreRequest(
         String storeDescription,
 
         @NotNull()
-        @NotBlank()
-        LocalDateTime storeDeliveryStar,
+        LocalDateTime storeDeliveryStart,
 
         @NotNull()
-        @NotBlank()
-        LocalDateTime storeDeliveryEnd) {
+        LocalDateTime storeDeliveryEnd
+
+//        @NotNull()
+//        @NotBlank()
+//        Segment storeSegment
+) {
 }

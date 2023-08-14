@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.dto.response.administrative;
+package com.developmentteam.brothersdeliveryapi.dto.response.administrative.segment;
 
 import java.io.Serializable;
 

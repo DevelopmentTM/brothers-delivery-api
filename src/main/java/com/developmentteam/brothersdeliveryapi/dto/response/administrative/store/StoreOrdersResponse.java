@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.dto.response.administrative;
+package com.developmentteam.brothersdeliveryapi.dto.response.administrative.store;
 
 import com.developmentteam.brothersdeliveryapi.entities.orders.Order;
 

@@ -24,11 +24,11 @@ spring:
 #    password: Seeloko153247,
 
     #    dev-bruno
-    username: postgres
-    password: postg
-
 #    username: postgres
 #    password: postg
+
+    username: postgres
+    password: root
 
 
 
