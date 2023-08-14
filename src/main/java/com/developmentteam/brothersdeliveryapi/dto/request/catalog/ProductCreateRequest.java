@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record ProductCreateRequest(
 
@@ -13,13 +14,13 @@ public record ProductCreateRequest(
     @NotBlank
     String productDescription,
     
-    @NotBlank
+    @NotNull
     BigDecimal productPrice,
 
-    @NotBlank
+    @NotNull
     Long categoryId,
 
-    @NotBlank
+    @NotNull
     Long storeId
 
 )implements Serializable {

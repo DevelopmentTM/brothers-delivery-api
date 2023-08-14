@@ -1,15 +1,12 @@
 package com.developmentteam.brothersdeliveryapi.dto.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class CategoryModel {
+public record CategoryModel(
 
-   String name;
-   String description;
+    String name,
+    String description
 
+)implements Serializable {
+    
 }

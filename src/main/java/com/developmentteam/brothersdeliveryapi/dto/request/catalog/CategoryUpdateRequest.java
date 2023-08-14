@@ -2,11 +2,15 @@ package com.developmentteam.brothersdeliveryapi.dto.request.catalog;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record CategoryCreateRequest(
+import java.io.Serializable;
 
-        @NotBlank()
+public record CategoryUpdateRequest(
+
+        @NotBlank
+        Long categoryId,
+        @NotBlank
         String categoryName,
-        @NotBlank()
+        @NotBlank
         String categoryDescription
-) {
+)implements Serializable {
 }

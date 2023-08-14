@@ -8,6 +8,7 @@ import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
 
 public record ProductResponse(
 
+        Long id,
     String nome,
     String description,
     BigDecimal price,
@@ -18,6 +19,7 @@ public record ProductResponse(
 
     public static ProductResponse toResponse(Product product,StoreModel store, CategoryResponse category){
         return new ProductResponse(
+                product.getProductId(),
                 product.getProductName(),
                 product.getProductDescription(),
                 product.getProductPrice(),
