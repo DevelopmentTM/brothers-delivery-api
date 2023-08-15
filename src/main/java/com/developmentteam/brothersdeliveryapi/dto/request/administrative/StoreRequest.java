@@ -8,11 +8,9 @@ import java.time.LocalDateTime;
 
 public record StoreRequest(
 
-        @NotNull()
         @NotBlank()
         String storeName,
 
-        @NotNull()
         @NotBlank()
         String storeDescription,
 
@@ -20,10 +18,9 @@ public record StoreRequest(
         LocalDateTime storeDeliveryStart,
 
         @NotNull()
-        LocalDateTime storeDeliveryEnd
+        LocalDateTime storeDeliveryEnd,
 
-//        @NotNull()
-//        @NotBlank()
-//        Segment storeSegment
+        @NotNull()
+        Long storeSegmentId
 ) {
 }
