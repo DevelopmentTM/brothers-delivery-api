@@ -46,6 +46,7 @@ public class SegmentController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSegment(@PathVariable Long id) {
         segmentService.deleteSegment(id);
     }
