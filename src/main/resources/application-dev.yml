@@ -18,17 +18,8 @@ spring:
     driverClassName: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/db_dev_brothers_delivery
-
-    #    dev-padrão
-#    username: postgres
-#    password: Seeloko153247,
-
-    #    dev-bruno
-#    username: postgres
-#    password: postg
-
-    username: postgres
-    password: root
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
 
 
