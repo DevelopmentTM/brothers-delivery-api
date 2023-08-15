@@ -7,13 +7,9 @@ import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryUpdat
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryCreateResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryResponse;
 import com.developmentteam.brothersdeliveryapi.services.catalog.CategoryService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,7 +21,7 @@ public class CategoryController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryCreateResponse create(@RequestBody @Valid CategoryCreateRequest categoryCreateRequest){
+    public CategoryCreateResponse create(@RequestBody CategoryCreateRequest categoryCreateRequest){
         return categoryService.createCategory(categoryCreateRequest);
     }
 
