@@ -1,6 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.entities.auth;
 
 import com.developmentteam.brothersdeliveryapi.entities.auth.User;
+import com.developmentteam.brothersdeliveryapi.entities.auth.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +23,9 @@ public class Role {
    @Column(name = "role_id")
    private Long roleId;
 
+   @Enumerated(EnumType.STRING)
    @Column(name =  "role_name")
-   private String roleName;
+   private RoleEnum roleName;
 
    @ManyToMany(mappedBy = "userRoles", fetch = FetchType.LAZY)
    private List<User> roleUsers;

@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -23,20 +22,21 @@ public class SecurityConfig {
 
       httpSecurity.headers(header -> {
          header.frameOptions().sameOrigin();
+         header.xssProtection();
+         header.contentSecurityPolicy("script-src 'self'");
       });
 
-      httpSecurity.authorizeHttpRequests(this::accessPermissions);
+      httpSecurity.authorizeHttpRequests(authRequest -> {
+
+         authRequest.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
+
+         authRequest.requestMatchers("/swagger-ui/**").permitAll();
+         authRequest.requestMatchers("/brothers-delivery-api-docs/**").permitAll();
+
+         authRequest.anyRequest().denyAll();
+      });
 
       return httpSecurity.build();
    }
 
-   private void accessPermissions(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authRequest) {
-      authRequest.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
-
-      authRequest.requestMatchers("/api/auth/**").permitAll();
-      authRequest.requestMatchers("/swagger-ui/**").permitAll();
-      authRequest.requestMatchers("/brothers-delivery-api-docs/**").permitAll();
-
-      authRequest.anyRequest().permitAll();
-   }
 }

@@ -1,14 +1,17 @@
 package com.developmentteam.brothersdeliveryapi.entities.auth;
 
-
 import com.developmentteam.brothersdeliveryapi.entities.customers.Address;
 import com.developmentteam.brothersdeliveryapi.entities.customers.Card;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Setter
 @Getter
@@ -17,7 +20,7 @@ import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 @NoArgsConstructor
 @Entity
 @Table(name = "_user", schema = "public")
-public class User {
+public class User implements UserDetails {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,4 +70,40 @@ public class User {
    )
    private List<Store> userStores;
 
+   @Override
+   public Collection<? extends GrantedAuthority> getAuthorities() {
+      return userRoles.stream().map(role ->
+              new SimpleGrantedAuthority(role.getRoleName().name()))
+              .toList();
+   }
+
+   @Override
+   public String getPassword() {
+      return this.userPassword;
+   }
+
+   @Override
+   public String getUsername() {
+      return this.userEmail;
+   }
+
+   @Override
+   public boolean isAccountNonExpired() {
+      return true;
+   }
+
+   @Override
+   public boolean isAccountNonLocked() {
+      return true;
+   }
+
+   @Override
+   public boolean isCredentialsNonExpired() {
+      return true;
+   }
+
+   @Override
+   public boolean isEnabled() {
+      return true;
+   }
 }

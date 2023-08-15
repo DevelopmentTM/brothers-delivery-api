@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.config.security;
+package com.developmentteam.brothersdeliveryapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.developmentteam.brothersdeliveryapi.config.security;
+package com.developmentteam.brothersdeliveryapi.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
