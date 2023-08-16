@@ -13,8 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Setter
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,8 +27,11 @@ public class User implements UserDetails {
    @Column(name = "user_id")
    private Long userId;
 
-   @Column(name = "user_name", nullable = false, length = 100)
-   private String userName;
+   @Column(name = "user_first_name", nullable = false, length = 100)
+   private String userFirstName;
+
+   @Column(name = "user_last_name", nullable = false, length = 100)
+   private String userLastName;
 
    @Column(name = "user_email", nullable = false, length = 100)
    private String userEmail;
