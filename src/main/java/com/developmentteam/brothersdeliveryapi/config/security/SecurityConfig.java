@@ -28,12 +28,12 @@ public class SecurityConfig {
 
       httpSecurity.authorizeHttpRequests(authRequest -> {
 
-         authRequest.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
+         authRequest.requestMatchers("/api/**").permitAll();
 
          authRequest.requestMatchers("/swagger-ui/**").permitAll();
          authRequest.requestMatchers("/brothers-delivery-api-docs/**").permitAll();
 
-         authRequest.anyRequest().denyAll();
+         authRequest.anyRequest().permitAll();
       });
 
       return httpSecurity.build();

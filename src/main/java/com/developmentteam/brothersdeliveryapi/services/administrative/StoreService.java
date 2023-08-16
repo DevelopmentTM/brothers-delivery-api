@@ -53,12 +53,17 @@ public class StoreService {
     }
 
     public StoreUpdateResponse updateStore(Long id, StoreRequest request) {
+
+        Segment segment = segmentRepository.findById(request.storeSegmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("storeSegmentId não encontrado"));
+
         return storeRepository.findById(id)
                 .map(store -> {
                     store.setStoreName(request.storeName());
                     store.setStoreDescription(request.storeDescription());
                     store.setStoreDeliveryStart(request.storeDeliveryStart());
                     store.setStoreDeliveryEnd(request.storeDeliveryEnd());
+                    store.setStoreSegment(segment);
                     return StoreUpdateResponse.toResponse(storeRepository.save(store));
                 }).orElseThrow();
     }

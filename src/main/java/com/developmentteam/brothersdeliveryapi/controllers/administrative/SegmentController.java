@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RestController
-@RequestMapping("/segments")
+@RequestMapping("/api/segments")
 @RequiredArgsConstructor
 public class SegmentController {
     
