@@ -13,9 +13,9 @@ public record StoreUpdateResponse(
 
         LocalDateTime storeDeliveryStart,
 
-        LocalDateTime storeDeliveryEnd
+        LocalDateTime storeDeliveryEnd,
 
-//        Segment storeSegment
+        String storeSegmentName
 
 ) implements Serializable {
 
@@ -25,8 +25,8 @@ public record StoreUpdateResponse(
                 store.getStoreName(),
                 store.getStoreDescription(),
                 store.getStoreDeliveryStart(),
-                store.getStoreDeliveryEnd()
-//                  store.getStoreSegment()
+                store.getStoreDeliveryEnd(),
+                store.getStoreSegment().getSegmentName()
         );
     }
 

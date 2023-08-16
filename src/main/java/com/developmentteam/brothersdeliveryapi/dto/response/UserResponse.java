@@ -14,7 +14,7 @@ public record UserResponse(
 
    public static UserResponse toResponse(User user) {
       return new UserResponse(
-              user.getUserName(),
+              user.getUserFirstName(),
               user.getUserEmail(),
               user.getUserPhone()
       );

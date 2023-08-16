@@ -49,7 +49,7 @@ public class Store {
     @Column(name = "store_delivery_end", nullable = true)
     private LocalDateTime storeDeliveryEnd;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "segment_id", referencedColumnName = "segment_id", nullable = true)
     public Segment storeSegment;
 

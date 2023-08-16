@@ -1,15 +1,14 @@
 package com.developmentteam.brothersdeliveryapi.config.exceptions.custom;
 
-public class ApiAuthException extends RuntimeException {
-   public ApiAuthException() {
-      super();
+import org.springframework.security.core.AuthenticationException;
+
+public class ApiAuthException extends AuthenticationException {
+
+   public ApiAuthException(String msg, Throwable cause) {
+      super(msg, cause);
    }
 
-   public ApiAuthException(String message) {
-      super(message);
-   }
-
-   public ApiAuthException(String message, Throwable cause) {
-      super(message, cause);
+   public ApiAuthException(String msg) {
+      super(msg);
    }
 }
