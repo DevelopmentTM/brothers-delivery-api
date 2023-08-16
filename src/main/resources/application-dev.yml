@@ -40,9 +40,9 @@ spring:
     sql-migration-prefix: V
     sql-migration-separator: __
     sql-migration-suffixes: .sql
-#    url:
-#    user:
-#    password:
+    url: jdbc:postgresql://localhost:5432/db_dev_brothers_delivery
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   output:
     ansi:
@@ -67,9 +67,22 @@ springdoc:
     enabled: true
     path: /brothers-delivery-api-docs
 
-###### extra settings ###############################################################
-
 app:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+
+    protocol: smtp
+    debug: false
+
+    smtp:
+      auth: true
+      starttls:
+        enable: true
+
   auth:
     tokens:
       jwt:
