@@ -15,7 +15,7 @@ public class UserService {
 
    public UserResponse createUser(UserRequest request) {
       User user = User.builder()
-              .userName(request.userName())
+              .userFirstName(request.userName())
               .userEmail(request.userEmail())
               .userPassword(request.userPassword())
               .userCpf(request.userCpf())
