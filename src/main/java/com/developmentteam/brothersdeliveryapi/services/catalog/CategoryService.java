@@ -8,7 +8,6 @@ import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryCreat
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryUpdateRequest;
 import org.springframework.stereotype.Service;
 
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryCreateResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryResponse;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Category;
 import com.developmentteam.brothersdeliveryapi.repositories.catalog.CategoryRepository;
@@ -21,25 +20,27 @@ public class CategoryService {
     
     private final CategoryRepository categoryRepository;
 
-    public CategoryCreateResponse createCategory(CategoryCreateRequest categoryCreateRequest){
+    public CategoryResponse createCategory(CategoryCreateRequest categoryCreateRequest){
 
         Category category = Category.builder()
-            .categoryName(categoryCreateRequest.categoryName())
-            .categoryDescription(categoryCreateRequest.categoryDescription())
+            .categoryName(categoryCreateRequest.getCategoryName())
+            .categoryDescription(categoryCreateRequest.getCategoryDescription())
         .build();
 
         Category categorySaved = categoryRepository.save(category);
 
-        return CategoryCreateResponse.toResponse(categorySaved.getCategoryId(), categorySaved.getCategoryName());
+        return CategoryResponse.toResponse(categorySaved);
     }
 
     public List<CategoryResponse> allCategory(){
         
-        List<Category> categorysFind = categoryRepository.findAll();
+        List<Category> categoriesFind = categoryRepository.findAll();
 
-        return categorysFind.stream().map(categorys -> {
+        return categoriesFind.stream().map(categories -> {
             CategoryResponse dto = new CategoryResponse(
-                    categorys.getCategoryName(), categorys.getCategoryDescription()
+                    categories.getCategoryId(),
+                    categories.getCategoryName(),
+                    categories.getCategoryDescription()
                 );
                 return dto;
 

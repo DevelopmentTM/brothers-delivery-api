@@ -1,12 +1,13 @@
 package com.developmentteam.brothersdeliveryapi.dto.request.catalog;
 
-import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record CategoryCreateRequest(
-
-        @NotBlank()
-        String categoryName,
-        @NotBlank()
-        String categoryDescription
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CategoryCreateRequest{
+    String categoryName;
+    String categoryDescription;
 }

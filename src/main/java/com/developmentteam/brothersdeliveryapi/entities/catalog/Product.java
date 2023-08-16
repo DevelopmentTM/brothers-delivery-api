@@ -1,6 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.entities.catalog;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,10 +47,10 @@ public class Product {
     private BigDecimal productPrice;
 
     @ManyToMany(mappedBy = "storeProducts", fetch = FetchType.LAZY)
-    private List<Store> productStores;
+    private List<Store> productStores = new ArrayList<>();
 
     @ManyToMany(mappedBy = "categoryProducts", fetch = FetchType.LAZY)
-    private List<Category> productCategories;
+    private List<Category> productCategories = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderItems> orderItems;

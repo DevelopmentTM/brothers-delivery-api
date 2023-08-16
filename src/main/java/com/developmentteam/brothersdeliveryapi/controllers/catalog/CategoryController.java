@@ -6,14 +6,14 @@ import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryCreat
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.CategoryUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.web.bind.annotation.*;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryCreateResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.CategoryResponse;
 import com.developmentteam.brothersdeliveryapi.services.catalog.CategoryService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/categorys")
+@RequestMapping("/categories")
 @RequiredArgsConstructor
 public class CategoryController {
     
@@ -21,7 +21,8 @@ public class CategoryController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryCreateResponse create(@RequestBody CategoryCreateRequest categoryCreateRequest){
+    public CategoryResponse create(@RequestBody CategoryCreateRequest categoryCreateRequest){
+
         return categoryService.createCategory(categoryCreateRequest);
     }
 

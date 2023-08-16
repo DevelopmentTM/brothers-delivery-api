@@ -6,12 +6,15 @@ import com.developmentteam.brothersdeliveryapi.entities.catalog.Category;
 
 public record CategoryResponse(
 
-    String nome,
-    String description
+        Long id,
+
+        String nome,
+        String description
 
 ) implements Serializable {
     public static CategoryResponse toResponse(Category category){
         return new CategoryResponse(
+                category.getCategoryId(),
             category.getCategoryName(),
             category.getCategoryDescription()
         );

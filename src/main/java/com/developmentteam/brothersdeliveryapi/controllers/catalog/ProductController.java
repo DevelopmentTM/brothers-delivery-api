@@ -17,16 +17,16 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
     
     private final ProductService productService;
 
     @PostMapping()
-    public ResponseEntity<ProductCreateResponse> create(@RequestBody @Valid ProductCreateRequest productCreateRequest){
-        ProductCreateResponse productCreateResponse = productService.createProduct(productCreateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productCreateResponse);
+    public ResponseEntity<?> create(@RequestBody @Valid ProductCreateRequest productCreateRequest){
+        productService.createProduct(productCreateRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/all")

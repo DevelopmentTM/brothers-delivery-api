@@ -77,6 +77,10 @@ public class User implements UserDetails {
               .toList();
    }
 
+   public String getUserName(){
+      return this.userName;
+   }
+
    @Override
    public String getPassword() {
       return this.userPassword;

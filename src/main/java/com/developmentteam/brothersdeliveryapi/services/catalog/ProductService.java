@@ -1,5 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.services.catalog;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ import com.developmentteam.brothersdeliveryapi.repositories.catalog.CategoryRepo
 import com.developmentteam.brothersdeliveryapi.repositories.catalog.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class ProductService {
 
     private final StoreRepository storeRepository;
 
+    @Transactional
     public ProductCreateResponse createProduct(ProductCreateRequest productRequest){
 
         Optional<Category> categoryFind = categoryRepository.findById(productRequest.categoryId());
@@ -41,14 +44,12 @@ public class ProductService {
             .productPrice(productRequest.productPrice())
         .build();
 
-        product.getProductStores().add(storeFind.get());
-
-        product.getProductCategories().add(categoryFind.get());
-
         Product productSaved = productRepository.save(product);
 
+        categoryFind.get().getCategoryProducts().add(product);
+        storeFind.get().getStoreProducts().add(product);
+
         return ProductCreateResponse.toResponse(productSaved);
-        
     }
 
     public List<ProductAllResponse> allProduct(){
