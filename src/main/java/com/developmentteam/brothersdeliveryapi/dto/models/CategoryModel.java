@@ -4,8 +4,9 @@ import java.io.Serializable;
 
 public record CategoryModel(
 
-    String name,
-    String description
+        Long id,
+        String name,
+        String description
 
 )implements Serializable {
     

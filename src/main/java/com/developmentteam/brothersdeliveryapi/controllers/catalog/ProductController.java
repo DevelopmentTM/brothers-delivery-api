@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.ProductUpdateRequest;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductCreateResponse;
+import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductUpdateResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,11 @@ public class ProductController {
     @GetMapping("/all")
     public ResponseEntity<List<ProductAllResponse>> allProduct(){
         return ResponseEntity.ok().body(productService.allProduct());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id){
+        return ResponseEntity.ok().body(productService.getProduct(id));
     }
 
     @PutMapping

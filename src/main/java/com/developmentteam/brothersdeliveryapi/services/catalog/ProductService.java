@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.developmentteam.brothersdeliveryapi.dto.models.StoreModel;
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.ProductUpdateRequest;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductCreateResponse;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductUpdateResponse;
+import com.developmentteam.brothersdeliveryapi.dto.response.catalog.*;
 import org.springframework.stereotype.Service;
 
 import com.developmentteam.brothersdeliveryapi.dto.request.catalog.ProductCreateRequest;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductAllResponse;
-import com.developmentteam.brothersdeliveryapi.dto.response.catalog.ProductResponse;
 import com.developmentteam.brothersdeliveryapi.entities.administrative.Store;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Category;
 import com.developmentteam.brothersdeliveryapi.entities.catalog.Product;
@@ -60,9 +58,9 @@ public class ProductService {
 
         Optional<Product> productFind = productRepository.findById(id);
 
-        System.out.println(productFind.get().toString());
-
-        return ProductResponse.toResponse(productFind.get(), null, null);
+        return ProductResponse.toResponse(productFind.get(),
+                StoreModel.toResponse(productFind.get().getProductStores().get(0)),
+                CategoryResponse.toResponse(productFind.get().getProductCategories().get(0)));
     }
 
     public void deleteProduct(Long id){

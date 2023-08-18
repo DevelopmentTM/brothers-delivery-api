@@ -46,11 +46,11 @@ public class Product {
     @Column(name = "product_price", nullable = true)
     private BigDecimal productPrice;
 
-    @ManyToMany(mappedBy = "storeProducts", fetch = FetchType.LAZY)
-    private List<Store> productStores = new ArrayList<>();
+    @ManyToMany(mappedBy = "storeProducts", fetch = FetchType.EAGER)
+    private List<Store> productStores;
 
-    @ManyToMany(mappedBy = "categoryProducts", fetch = FetchType.LAZY)
-    private List<Category> productCategories = new ArrayList<>();
+    @ManyToMany(mappedBy = "categoryProducts", fetch = FetchType.EAGER)
+    private List<Category> productCategories;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderItems> orderItems;
