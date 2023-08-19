@@ -42,7 +42,6 @@ public class TransparentTokenService {
 
       return tokenService;
    }
-
    public PublicData readPublicData(String rawToken) {
       byte[] bytes = Base64.getDecoder().decode(rawToken);
       String rawTokenDecode = new String(bytes);

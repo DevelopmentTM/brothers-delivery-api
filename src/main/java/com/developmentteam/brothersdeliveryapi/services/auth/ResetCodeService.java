@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.TimeZone;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +58,7 @@ public class ResetCodeService {
       return ResetCode.builder()
               .resetCodeUser(user)
               .resetCode(RandomUtils.generateResetCode())
-              .resetCodeExpiryAt(LocalDateTime.from(Instant.now().plusMillis(expirationTime)))
+              .resetCodeExpiryAt(LocalDateTime.ofInstant(Instant.now().plusMillis(expirationTime), TimeZone.getDefault().toZoneId()))
               .resetCodeActive(true)
               .build();
    }

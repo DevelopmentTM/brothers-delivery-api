@@ -10,12 +10,12 @@ public record SignUpRequest(
         @NotBlank
         String userFirstName,
         @NotBlank
-        @IsEmailValid()
         String userLastName,
         @NotBlank
-        @IsPasswordStrong()
+//        @IsPasswordStrong(message = "teste")
         String userPassword,
         @NotBlank
+//        @IsEmailValid(message = "teste")
         String userEmail,
         @NotBlank
         String userCpf,

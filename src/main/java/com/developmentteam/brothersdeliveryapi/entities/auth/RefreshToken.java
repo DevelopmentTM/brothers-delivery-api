@@ -22,7 +22,7 @@ public class RefreshToken {
    @Column(name = "refresh_token", nullable = false, length = 200)
    private String refreshToken;
 
-   @Column(name = "refresh_code_expiry_at", nullable = false)
+   @Column(name = "refresh_token_expiry_at", nullable = false)
    private LocalDateTime refreshTokenExpiryAt;
 
    @OneToOne(fetch = FetchType.LAZY)

@@ -3,15 +3,13 @@ package com.developmentteam.brothersdeliveryapi.entities.auth;
 import com.developmentteam.brothersdeliveryapi.entities.auth.User;
 import com.developmentteam.brothersdeliveryapi.entities.auth.enums.RoleEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

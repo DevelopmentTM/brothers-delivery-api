@@ -36,7 +36,7 @@ public class User implements UserDetails {
    @Column(name = "user_email", nullable = false, length = 100)
    private String userEmail;
 
-   @Column(name = "user_password", nullable = false, length = 50)
+   @Column(name = "user_password", nullable = false, length = 200)
    private String userPassword;
 
    @Column(name = "user_phone", nullable = false,  length = 15)
@@ -44,6 +44,9 @@ public class User implements UserDetails {
 
    @Column(name = "user_cpf", nullable = false, length = 30)
    private String userCpf;
+
+   @Column(name = "email_verified", nullable = false)
+   private boolean emailVerified;
 
    @OneToMany(mappedBy = "cardUser", fetch = FetchType.LAZY)
    private List<Card> userCards;
@@ -57,7 +60,7 @@ public class User implements UserDetails {
    @OneToOne(mappedBy = "refreshTokenUser")
    private RefreshToken userRefreshToken;
 
-   @ManyToMany(fetch = FetchType.LAZY)
+   @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(
            name = "user_roles",
            joinColumns = @JoinColumn(name = "user_id"),
