@@ -2,6 +2,7 @@ package com.developmentteam.brothersdeliveryapi.services.auth;
 
 import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ApiAuthException;
 import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ResourceNotFoundException;
+import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.UserNotAuthenticatedException;
 import com.developmentteam.brothersdeliveryapi.dto.application.ApiResponseMessage;
 import com.developmentteam.brothersdeliveryapi.dto.request.auth.*;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.CheckResetCodeResponse;
@@ -28,7 +29,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -61,7 +61,8 @@ public class AuthService {
       Authentication authentication = new UsernamePasswordAuthenticationToken(request.userEmail(), request.userPassword());
       this.authenticationManager.authenticate(authentication);
 
-      String generatedToken = this.tokenProvider.generateToken(storedUser, Map.of("roles", storedUser.getUserRoles()));
+      // TODO: 20/12/2023 busca das roles do usuário apresenta o que impede seu mapeamento no payload do token
+      String generatedToken = this.tokenProvider.generateToken(storedUser/*, Map.of("roles", storedUser.getUserRoles())*/);
 
       return SignInResponse.toResponse(generatedToken);
    }
@@ -198,6 +199,7 @@ public class AuthService {
          var objectPrincipal = authentication.getPrincipal();
          if (objectPrincipal instanceof User loggedUser) return loggedUser;
       }
-      return null;
+
+      throw new UserNotAuthenticatedException("Nenhum usuário autenticado");
    }
 }
