@@ -1,6 +1,7 @@
 package com.developmentteam.brothersdeliveryapi.services.auth;
 
 import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ApiAuthException;
+import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ResourceNotFoundException;
 import com.developmentteam.brothersdeliveryapi.dto.application.ApiResponseMessage;
 import com.developmentteam.brothersdeliveryapi.dto.request.auth.*;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.CheckResetCodeResponse;
@@ -8,10 +9,8 @@ import com.developmentteam.brothersdeliveryapi.dto.response.auth.ForgotPasswordR
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.RefreshTokenResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.SignInResponse;
 import com.developmentteam.brothersdeliveryapi.entities.auth.RefreshToken;
-import com.developmentteam.brothersdeliveryapi.entities.auth.ResetCode;
 import com.developmentteam.brothersdeliveryapi.entities.auth.Role;
 import com.developmentteam.brothersdeliveryapi.entities.auth.User;
-import com.developmentteam.brothersdeliveryapi.entities.auth.enums.RoleEnum;
 import com.developmentteam.brothersdeliveryapi.events.event.SendResetCodeEvent;
 import com.developmentteam.brothersdeliveryapi.events.event.SendVerificationEmailEvent;
 import com.developmentteam.brothersdeliveryapi.events.publisher.NotificationPublisher;
@@ -22,13 +21,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.token.KeyBasedPersistenceTokenService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -48,19 +51,17 @@ public class AuthService {
 
    public SignInResponse signIn(SignInRequest request) {
 
-      var authenticatedUser = this.userRepository.findUserByUserEmail(request.userEmail())
-              .orElseThrow(() -> new ApiAuthException("usuário não encontrado"));
+      User storedUser = this.userRepository.findUserByUserEmail(request.userEmail())
+              .orElseThrow(() -> new ResourceNotFoundException("Email não cadastrado"));
 
-      if ( !(this.passwordEncoder.matches(request.userPassword(), authenticatedUser.getPassword()))) {
-         throw new ApiAuthException("senha incorreta");
-      }
+      boolean match = this.passwordEncoder.matches(request.userPassword(), storedUser.getPassword());
 
-      var authentication = new UsernamePasswordAuthenticationToken(
-              request.userEmail(), request.userPassword()
-      );
+      if (!(match)) throw new ApiAuthException("Senha incorreta");
+
+      Authentication authentication = new UsernamePasswordAuthenticationToken(request.userEmail(), request.userPassword());
       this.authenticationManager.authenticate(authentication);
 
-      var generatedToken = this.tokenProvider.generateToken(authenticatedUser);
+      String generatedToken = this.tokenProvider.generateToken(storedUser, Map.of("roles", storedUser.getUserRoles()));
 
       return SignInResponse.toResponse(generatedToken);
    }
@@ -68,14 +69,12 @@ public class AuthService {
    public ApiResponseMessage signUn(SignUpRequest request) {
 
       boolean userExists = this.userRepository.existsUserByUserEmail(request.userEmail());
-      if (userExists) {
-         throw new ApiAuthException("email em uso por outro usuário");
-      }
+
+      if (userExists) throw new ApiAuthException("Email em uso por um usuário já cadastrado");
 
       String encryptedPassword = this.passwordEncoder.encode(request.userPassword());
 
-      Role role = Role.builder().roleName(RoleEnum.ROLE_USER).build();
-      Role roleSaved = this.roleRepository.save(role);
+      Role role = this.roleRepository.findById(1L).orElseThrow(ResourceNotFoundException.msg("role não encontrada"));
 
       User user = User.builder()
               .userFirstName(request.userFirstName())
@@ -84,7 +83,7 @@ public class AuthService {
               .userPassword(encryptedPassword)
               .userPhone(request.userPhone())
               .userCpf(request.userCpf())
-              .userRoles(List.of(roleSaved))
+              .userRoles(List.of(role))
               .build();
 
       User userSaved = this.userRepository.save(user);
@@ -102,34 +101,37 @@ public class AuthService {
 
       var data = this.transparentTokenService.readPublicData(token);
 
-      boolean isExpired = transparentTokenService.isExpired(data);
+      User storedUser = this.userRepository.findUserByUserEmail(data.email())
+              .orElseThrow(ResourceNotFoundException.msg("Usuário não cadastrado no sistema"));
 
-      if (isExpired) throw new ApiAuthException("Token in expired");
+      if (storedUser.isEmailVerified()) throw new ApiAuthException("Email já foi verificado");
 
-      Optional<User> user = this.userRepository.findUserByUserEmail(data.email());
+      boolean isExpired = this.transparentTokenService.isExpired(data);
 
-      if (user.isPresent()) {
-         if (user.get().isEmailVerified()) {
-            throw new ApiAuthException("confirm verification exception");
-         }
-      }
+      if (isExpired) throw new ApiAuthException("Link expirado");
 
       KeyBasedPersistenceTokenService tokenService = transparentTokenService
-              .getKeyBasedPersistenceTokenFromUser(user.get());
+              .getInstanceForUser(storedUser);
 
       tokenService.verifyToken(token);
 
-      user.get().setEmailVerified(true);
-      this.userRepository.save(user.get());
+      storedUser.setEmailVerified(true);
+      this.userRepository.save(storedUser);
 
       return ApiResponseMessage.of("Email verificado com sucesso!");
    }
 
+   public ApiResponseMessage resendVerificationLink() {
+      return ApiResponseMessage.of("not implemented");
+   }
+
    public ForgotPasswordResponse forgotPassword(ForgotPasswordRequest request) {
-      User user = userRepository.findUserByUserEmail(request.email()).get();
+
+      User user = this.userRepository.findUserByUserEmail(request.email())
+              .orElseThrow(ResourceNotFoundException.msg("Usuário não cadastrado no sistema"));
 
       var event = SendResetCodeEvent.createEvent(user);
-      notificationPublisher.onSendResetCode(event);
+      this.notificationPublisher.onSendResetCode(event);
 
       return ForgotPasswordResponse.toResponse(
               "o código foi enviado para o email informado",
@@ -139,37 +141,36 @@ public class AuthService {
 
    public CheckResetCodeResponse checkResetCode(CheckResetCodeRequest request) {
 
-      ResetCode resetCode = resetCodeService
-              .findResetCodeByEmailAndCode(request.email(), request.resetCode());
+      var resetCode = this.resetCodeService.findResetCodeByEmailAndCode(request.email(), request.resetCode());
 
-      resetCodeService.isValid(resetCode);
-      resetCodeService.inactivateResetCode(resetCode);
+      this.resetCodeService.isValid(resetCode);
+      this.resetCodeService.inactivateResetCode(resetCode);
 
-      String generatedToken = transparentTokenService.generateToken(resetCode.getResetCodeUser());
+      String generatedResetToken = this.transparentTokenService.generateToken(resetCode.getResetCodeUser());
 
-      return CheckResetCodeResponse.toResponse(generatedToken);
+      return CheckResetCodeResponse.toResponse(generatedResetToken);
    }
 
    public ApiResponseMessage resetPassword(ResetPasswordRequest request) {
 
-      var data = transparentTokenService.readPublicData(request.resetToken());
+      var data = this.transparentTokenService.readPublicData(request.resetToken());
 
-      boolean isExpired = transparentTokenService.isExpired(data);
+      User user = userRepository.findUserByUserEmail(data.email())
+              .orElseThrow(ResourceNotFoundException.msg("Usuário não encontrado"));
 
-      if (isExpired) throw new ApiAuthException("Token in expired");
+      boolean isExpired = this.transparentTokenService.isExpired(data);
 
-      User user = userRepository.findUserByUserEmail(data.email()).get();
+      if (isExpired) throw new ApiAuthException("Token expirado");
 
-      KeyBasedPersistenceTokenService tokenService = transparentTokenService
-              .getKeyBasedPersistenceTokenFromUser(user);
+      KeyBasedPersistenceTokenService tokenService = this.transparentTokenService
+              .getInstanceForUser(user);
 
       tokenService.verifyToken(request.resetToken());
 
-      if (!(request.password().equalsIgnoreCase(request.confirmPassword()))) {
-         throw new ApiAuthException("password incompativeis");
-      }
+      boolean passwordMatch = request.password().equalsIgnoreCase(request.confirmPassword());
+      if (!passwordMatch) throw new ApiAuthException("Senhas incompatíveis");
 
-      userService.changeThePassword(user, request.password());
+      this.userService.changeThePassword(user, request.password());
 
       return ApiResponseMessage.of("sua senha foi redefinida com sucesso");
    }
@@ -178,7 +179,25 @@ public class AuthService {
 
       RefreshToken storedRefreshToken = this.refreshTokenService.findByToken(request.refreshToken());
 
-      return null;
+      this.refreshTokenService.isValid(storedRefreshToken);
+
+      User user = storedRefreshToken.getRefreshTokenUser();
+
+      String newJwtToken = this.tokenProvider.generateToken(user, Map.of("roles", user.getUserRoles()));
+
+      RefreshToken refreshToken = this.refreshTokenService.generateRefreshToken(user);
+      String rawRefreshToken = refreshToken.getRefreshToken();
+
+      return RefreshTokenResponse.toResponse(newJwtToken, rawRefreshToken);
    }
 
+   public static User getLoggedUser() {
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+      if (Objects.nonNull(authentication)) {
+         var objectPrincipal = authentication.getPrincipal();
+         if (objectPrincipal instanceof User loggedUser) return loggedUser;
+      }
+      return null;
+   }
 }

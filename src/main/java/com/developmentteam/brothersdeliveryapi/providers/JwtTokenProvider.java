@@ -84,4 +84,8 @@ public class JwtTokenProvider implements TokenProvider {
       return Keys.hmacShaKeyFor(keyBytes);
    }
 
+   public Map<String, Object> mapClaims(String claimKey, String claimValue) {
+      return Map.of(claimKey, claimValue);
+   }
+
 }

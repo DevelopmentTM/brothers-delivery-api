@@ -16,24 +16,16 @@ import java.util.Date;
 public class TransparentTokenService {
 
    public String generateToken(User user) {
-      KeyBasedPersistenceTokenService tokenService = this.getKeyBasedPersistenceTokenFromUser(user);
-      String email = user.getUserEmail();
-      Token generatedToken = tokenService.allocateToken(email);
+      KeyBasedPersistenceTokenService tokenService = this.getInstanceForUser(user);
+      Token generatedToken = tokenService.allocateToken(user.getUserEmail());
       return generatedToken.getKey();
    }
 
-   public boolean isExpired(PublicData publicData) {
-      Instant createdAt = new Date(publicData.timestamp).toInstant();
-      Instant now = new Date().toInstant();
-      return createdAt.plus((Duration.ofMinutes(5))).isBefore(now);
-   }
-
-   public KeyBasedPersistenceTokenService getKeyBasedPersistenceTokenFromUser(User user) {
-      String secret = user.getUserPassword();
+   public KeyBasedPersistenceTokenService getInstanceForUser(User user) {
       KeyBasedPersistenceTokenService tokenService = new KeyBasedPersistenceTokenService();
 
       try {
-         tokenService.setServerSecret(secret);
+         tokenService.setServerSecret(user.getUserPassword());
          tokenService.setServerInteger(32);
          tokenService.setSecureRandom(new SecureRandomFactoryBean().getObject());
       } catch (Exception e) {
@@ -42,6 +34,13 @@ public class TransparentTokenService {
 
       return tokenService;
    }
+
+   public boolean isExpired(PublicData publicData) {
+      Instant createdAt = new Date(publicData.timestamp).toInstant();
+      Instant now = new Date().toInstant();
+      return createdAt.plus((Duration.ofMinutes(5))).isBefore(now);
+   }
+
    public PublicData readPublicData(String rawToken) {
       byte[] bytes = Base64.getDecoder().decode(rawToken);
       String rawTokenDecode = new String(bytes);

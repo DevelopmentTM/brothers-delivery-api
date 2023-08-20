@@ -5,6 +5,7 @@ import com.developmentteam.brothersdeliveryapi.dto.application.ApiResponseMessag
 import com.developmentteam.brothersdeliveryapi.dto.request.auth.*;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.CheckResetCodeResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.ForgotPasswordResponse;
+import com.developmentteam.brothersdeliveryapi.dto.response.auth.RefreshTokenResponse;
 import com.developmentteam.brothersdeliveryapi.dto.response.auth.SignInResponse;
 import com.developmentteam.brothersdeliveryapi.services.auth.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -58,7 +59,10 @@ public class AuthController {
       return ApiResponse.<ApiResponseMessage>builder().status(HttpStatus.OK).response(response).build();
    }
 
-//   @PostMapping("/refresh")
-//   public ResponseEntity<ApiResponse<>>
+   @PostMapping("/refresh")
+   public ResponseEntity<ApiResponse<RefreshTokenResponse>> refreshJwtToken(@RequestBody @Valid RefreshTokenRequest request) {
+      RefreshTokenResponse response = this.authService.refreshJwtToken(request);
+      return ApiResponse.<RefreshTokenResponse>builder().status(HttpStatus.OK).response(response).build();
+   }
 
 }

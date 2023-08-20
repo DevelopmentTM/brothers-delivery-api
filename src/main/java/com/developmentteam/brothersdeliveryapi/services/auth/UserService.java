@@ -1,5 +1,6 @@
 package com.developmentteam.brothersdeliveryapi.services.auth;
 
+import com.developmentteam.brothersdeliveryapi.config.exceptions.custom.ResourceNotFoundException;
 import com.developmentteam.brothersdeliveryapi.dto.request.UserRequest;
 import com.developmentteam.brothersdeliveryapi.dto.response.UserResponse;
 import com.developmentteam.brothersdeliveryapi.entities.auth.User;
