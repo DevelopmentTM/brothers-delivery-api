@@ -94,4 +94,3 @@ app:
 
       reset-code:
         expiration: 300000 # 5 minutes
-
